@@ -1,11 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://bjtkbwi2b87ws"]
+[gd_scene load_steps=27 format=3 uid="uid://bjtkbwi2b87ws"]
 
 [ext_resource type="Script" path="res://Scripts/Tools/Main.gd" id="1_jlg1y"]
 [ext_resource type="Script" path="res://Scripts/Tools/CameraShake.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://ke83lndodr8n" path="res://Scenes/MainMenu.tscn" id="3"]
 [ext_resource type="Script" path="res://Scripts/Tools/Game.gd" id="3_kenll"]
+[ext_resource type="Script" path="res://Scripts/Clouds.gd" id="3_td4ku"]
 [ext_resource type="Script" path="res://Scripts/Tools/StateMachine.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://51g21iwaqggp" path="res://Objects/Player/Player.tscn" id="4_0phv3"]
+[ext_resource type="PackedScene" uid="uid://c0jc2f3p3a1ks" path="res://Objects/Clouds/Cloud.tscn" id="4_4ri8c"]
 [ext_resource type="PackedScene" uid="uid://bcaue8so15dgx" path="res://Scenes/GameOverlay.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c3nl7qrkm777s" path="res://Objects/Monster/Monster.tscn" id="5_3tnpe"]
 [ext_resource type="PackedScene" uid="uid://b0tr484jifhat" path="res://Objects/Tilemap/Block1.tscn" id="6_m2m16"]
@@ -544,6 +546,11 @@ script = ExtResource("1_jlg1y")
 process_mode = 3
 editor_description = "Handles basic game state like 'Menu', 'Game Running', 'Paused'. Runs while the game is paused. Used in main.gd and glues progess.gd and game.gd together."
 script = ExtResource("4")
+
+[node name="Clouds" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("3_td4ku")
+cloud_scene = ExtResource("4_4ri8c")
 
 [node name="Game" type="Node2D" parent="."]
 process_mode = 1
