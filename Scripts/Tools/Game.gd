@@ -9,8 +9,6 @@ const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").G
 
 @export var block_scenes: Array[PackedScene]
 
-@onready var _tilemap := $Tilemap
-
 var _map: Map
 
 var _block: Block
@@ -25,7 +23,8 @@ func _ready():
 	Effects.setup($Camera2D)
 	
 	State.setup(
-		$Tilemap,
+		$WallTilemap,
+		$GroundTilemap,
 		player_scene,
 		monster_scene,
 		spawn_scene)

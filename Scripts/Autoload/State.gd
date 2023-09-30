@@ -7,12 +7,19 @@ var _spawn_scene: PackedScene
 var _player: CharacterBody2D
 
 var _runner: Runner
-var _tilemap: TileMap
+var _wall_tilemap: TileMap
+var _ground_tilemap: TileMap
 var _map: Map
 
 var _spawn_group_funcs := []
 
 var _health := 3
+
+var _grass_tops_y = 5
+var _grass_tops := [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5)]
+
+var _grass_fronts_y = 6
+var _grass_fronts := [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)]
 
 
 signal health_changed(new_health)
@@ -23,11 +30,13 @@ var player_pos: Vector2:
 		return _player.position
 
 func setup(
-		tilemap: TileMap,
+		wall_tilemap: TileMap,
+		ground_tilemap: TileMap,
 		player_scene: PackedScene,
 		monster_scene: PackedScene,
 		spawn_scene: PackedScene):
-	_tilemap = tilemap
+	_wall_tilemap = wall_tilemap
+	_ground_tilemap = ground_tilemap
 	_player_scene = player_scene
 	_monster_scene = monster_scene
 	_spawn_scene = spawn_scene
@@ -74,6 +83,9 @@ func set_tile(coord: Vector2i, tile_type) -> void:
 
 
 func _init_tilemap():
+	_wall_tilemap.clear()
+	_ground_tilemap.clear()
+	
 	for y in _map.height:
 		for x in _map.width:
 			var coord := Vector2i(x, y)
@@ -83,11 +95,22 @@ func _init_tilemap():
 func _set_cell(coord: Vector2i, tile_type) -> void:
 	match tile_type:
 		Enums.TileType.Ground:
-			_tilemap.set_cell(0, coord, 0, Vector2i(0, 0))
+			_wall_tilemap.set_cells_terrain_connect(0, [coord], 0, -1, false)
+			_ground_tilemap.set_cell(0, coord, 0, Tools.rand_item(_grass_tops))
+		
 		Enums.TileType.Wall:
-			_tilemap.set_cell(0, coord, 0, Vector2i(1, 0))
+			_wall_tilemap.set_cells_terrain_connect(0, [coord], 0, 0, false)
+			_ground_tilemap.set_cell(0, coord, 0, Tools.rand_item(_grass_tops))
+			
 		Enums.TileType.Empty, Enums.TileType.ForcedEmpty:
-			_tilemap.set_cell(0, coord)
+			_wall_tilemap.set_cells_terrain_connect(0, [coord], 0, -1, false)
+			_ground_tilemap.set_cell(0, coord)
+			
+			if _ground_tilemap.get_cell_atlas_coords(0, coord + Vector2i.UP).y == _grass_tops_y:
+				_ground_tilemap.set_cell(0, coord, 0, Tools.rand_item(_grass_fronts))
+			
+			if _ground_tilemap.get_cell_atlas_coords(0, coord + Vector2i.DOWN).y == _grass_fronts_y:
+				_ground_tilemap.set_cell(0, coord + Vector2i.DOWN)
 		_:
 			printerr("Unknown TileType")
 
