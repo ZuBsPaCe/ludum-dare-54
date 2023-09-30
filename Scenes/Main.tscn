@@ -1,12 +1,31 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjtkbwi2b87ws"]
+[gd_scene load_steps=14 format=3 uid="uid://bjtkbwi2b87ws"]
 
-[ext_resource type="Script" path="res://Scripts/Tools/Examples/ExampleGame.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Tools/Main.gd" id="1_jlg1y"]
 [ext_resource type="Script" path="res://Scripts/Tools/CameraShake.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://ke83lndodr8n" path="res://Scenes/MainMenu.tscn" id="3"]
+[ext_resource type="Script" path="res://Scripts/Tools/Game.gd" id="3_kenll"]
 [ext_resource type="Script" path="res://Scripts/Tools/StateMachine.gd" id="4"]
-[ext_resource type="PackedScene" path="res://Scenes/GameOverlay.tscn" id="5"]
-[ext_resource type="Script" path="res://Scripts/Tools/Examples/ExampleMain.gd" id="6"]
-[ext_resource type="Script" path="res://Scripts/Tools/Examples/ExampleProcess.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://51g21iwaqggp" path="res://Objects/Player/Player.tscn" id="4_0phv3"]
+[ext_resource type="PackedScene" uid="uid://bcaue8so15dgx" path="res://Scenes/GameOverlay.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://c3nl7qrkm777s" path="res://Objects/Monster/Monster.tscn" id="5_3tnpe"]
+[ext_resource type="Texture2D" uid="uid://bxgwfkunobc1" path="res://Objects/Tilemap/Tilemap.png" id="6_guu36"]
+[ext_resource type="Script" path="res://Scripts/Tools/Process.gd" id="6_m6gji"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_igkvt"]
+texture = ExtResource("6_guu36")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_n4ir7"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_igkvt")
 
 [sub_resource type="Environment" id="1"]
 background_mode = 4
@@ -20,7 +39,7 @@ glow_blend_mode = 1
 [node name="Main" type="Node"]
 process_mode = 3
 editor_description = "Glues process.gd and game.gd together with the game state. Add pause and transition logic here."
-script = ExtResource("6")
+script = ExtResource("1_jlg1y")
 
 [node name="GameState" type="Node" parent="."]
 process_mode = 3
@@ -30,17 +49,20 @@ script = ExtResource("4")
 [node name="Game" type="Node2D" parent="."]
 process_mode = 1
 editor_description = "Nodes in Game will not run while the game is paused. This affects _process(), _input() and _unhandled_input(). Add game logic, ingame ui, levels and ingame sound here."
-script = ExtResource("1")
+script = ExtResource("3_kenll")
+player_scene = ExtResource("4_0phv3")
+monster_scene = ExtResource("5_3tnpe")
+
+[node name="Tilemap" type="TileMap" parent="Game"]
+tile_set = SubResource("TileSet_n4ir7")
+format = 2
 
 [node name="EntityContainer" type="Node2D" parent="Game"]
+unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="Game"]
+position = Vector2(960, 540)
 script = ExtResource("2")
-
-[node name="Dummy" type="Polygon2D" parent="Game"]
-position = Vector2(11.6237, 10.5366)
-color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(-11.6237, -10.5366, -27.6237, 21.4634, 4.37634, 21.4634)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game"]
 environment = SubResource("1")
@@ -48,7 +70,7 @@ environment = SubResource("1")
 [node name="Process" type="Node" parent="."]
 process_mode = 3
 editor_description = "Nodes in Process run while the game is paused. _process(), _input() and _unhandled_input() will always run. Add game state, transitions, menus, menu sounds and music in here. Handles general settings, like fullscreen switching and volume."
-script = ExtResource("7")
+script = ExtResource("6_m6gji")
 
 [node name="GameOverlay" parent="Process" instance=ExtResource("5")]
 

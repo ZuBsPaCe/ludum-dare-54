@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Game"
+config/name="Crate Escape"
 run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.1")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -21,11 +21,11 @@ config/windows_native_icon="res://Sprites/Icon/icon.ico"
 
 [autoload]
 
-Globals="*res://Scripts/Tools/Examples/ExampleGlobals.gd"
 Tools="*res://Scripts/Tools/Tools.gd"
-FlatLightingLocator="*res://FlatLighting/FlatLightingLocator.gd"
-State="*res://Scripts/Tools/Examples/ExampleState.gd"
-Effects="*res://Scripts/Tools/Examples/ExampleEffects.gd"
+Globals="*res://Scripts/Autoload/Globals.gd"
+State="*res://Scripts/Autoload/State.gd"
+Effects="*res://Scripts/Autoload/Effects.gd"
+Enums="*res://Scripts/Autoload/Enums.gd"
 
 [debug]
 

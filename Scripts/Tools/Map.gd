@@ -183,10 +183,19 @@ func clear_marks() -> void:
 	_marked_indexes.clear()
 
 
-func mark_item(x: int, y: int) -> void:
+func mark_item_xy(x: int, y: int) -> void:
 	_marked_indexes.append(y * width + x)
 
+func mark_item(coord: Vector2i) -> void:
+	mark_item_xy(coord.x, coord.y)
 
 func set_marked_items(item) -> void:
 	for index in _marked_indexes:
 		_map[index] = item
+
+func is_marked_xy(x: int, y: int) -> bool:
+	var index := y * width + x
+	return _marked_indexes.has(index)
+
+func is_marked(coord: Vector2i) -> bool:
+	return is_marked_xy(coord.x, coord.y)
