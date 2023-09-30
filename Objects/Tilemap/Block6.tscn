@@ -1,26 +1,24 @@
 [gd_scene load_steps=3 format=3 uid="uid://deiedo4315ugn"]
 
 [ext_resource type="Script" path="res://Scripts/Block.gd" id="1_n1kvh"]
-[ext_resource type="Texture2D" uid="uid://csucj602p3eyf" path="res://Objects/Tilemap/Tile.png" id="2_0v6dq"]
+[ext_resource type="PackedScene" uid="uid://vjrt0uf4cuk8" path="res://Objects/Tilemap/BlockTile.tscn" id="2_248vy"]
 
 [node name="Block6" type="Node2D"]
 script = ExtResource("1_n1kvh")
-tile_offsets = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, -1)])
 
-[node name="Tile1" type="Sprite2D" parent="."]
-position = Vector2(0, -64)
-texture = ExtResource("2_0v6dq")
+[node name="BlockTile1" parent="." instance=ExtResource("2_248vy")]
 
-[node name="Tile3" type="Sprite2D" parent="."]
-texture = ExtResource("2_0v6dq")
-
-[node name="Tile4" type="Sprite2D" parent="."]
-position = Vector2(-64, -64)
-texture = ExtResource("2_0v6dq")
-
-[node name="Tile2" type="Sprite2D" parent="."]
+[node name="BlockTile2" parent="." instance=ExtResource("2_248vy")]
 position = Vector2(64, 0)
-texture = ExtResource("2_0v6dq")
+tile_offset = Vector2i(1, 0)
+
+[node name="BlockTile3" parent="." instance=ExtResource("2_248vy")]
+position = Vector2(0, -64)
+tile_offset = Vector2i(0, -1)
+
+[node name="BlockTile4" parent="." instance=ExtResource("2_248vy")]
+position = Vector2(-64, -64)
+tile_offset = Vector2i(-1, -1)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

@@ -42,7 +42,16 @@ func _physics_process(delta):
 			if State.decrease_health() > 0:
 				_hit_cooldown.restart()
 			else:
-				set_physics_process(false)
-				Globals.switch_game_state(Enums.GameState.DEAD)
-			
+				_die()
+	
+	var coord := Tools.to_coord(position)
+	if State.is_valid_tile(coord):
+		if State.is_tile(coord, Enums.TileType.Empty) or State.is_tile(coord, Enums.TileType.ForcedEmpty):
+			_die()
 
+func _die():
+	if _dead:
+		return
+	_dead = true
+	set_physics_process(false)
+	Globals.switch_game_state(Enums.GameState.DEAD)

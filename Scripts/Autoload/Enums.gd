@@ -18,5 +18,7 @@ enum LevelState {
 
 enum TileType {
 	Ground,
-	Wall
+	Wall,
+	Empty,
+	ForcedEmpty
 }

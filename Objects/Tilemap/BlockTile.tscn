@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://vjrt0uf4cuk8"]
+
+[ext_resource type="Texture2D" uid="uid://csucj602p3eyf" path="res://Objects/Tilemap/Tile.png" id="1_qqc10"]
+[ext_resource type="Script" path="res://Scripts/BlockTile.gd" id="2_u6awn"]
+[ext_resource type="Texture2D" uid="uid://ivfldmmhdmkl" path="res://Objects/Tilemap/ArrowUp.png" id="3_sm42j"]
+[ext_resource type="Texture2D" uid="uid://pxgc0f8fb5dd" path="res://Objects/Tilemap/ArrowDown.png" id="4_52xva"]
+
+[node name="BlockTile" type="Sprite2D" groups=["BlockTile"]]
+texture = ExtResource("1_qqc10")
+script = ExtResource("2_u6awn")
+
+[node name="ArrowUp" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("3_sm42j")
+
+[node name="ArrowDown" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("4_52xva")

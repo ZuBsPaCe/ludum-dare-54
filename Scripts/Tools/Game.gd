@@ -19,8 +19,8 @@ var _runner: Runner
 
 var _spawn_cooldown := Cooldown.new()
 
-
 var game_running := false
+
 func _ready():
 	Effects.setup($Camera2D)
 	
@@ -50,7 +50,7 @@ func _process(delta):
 		
 		_block.update_mouse_pos(mouse_pos)
 		
-		if _block.valid and Input.is_action_just_pressed("left_click"):
+		if _block.valid and Input.is_action_just_pressed("apply_block"):
 			_block.apply()
 			_create_new_block()
 			
@@ -79,6 +79,14 @@ func start(runner: Runner):
 
 	_map = Map.new(viewport_size.x / Globals.TILE_SIZE, viewport_size.y / Globals.TILE_SIZE)
 	_map.set_all(Enums.TileType.Ground)
+	
+	for x in range(_map.width):
+		_map.set_item_xy(x, 0, Enums.TileType.ForcedEmpty)
+		_map.set_item_xy(x, _map.height - 1, Enums.TileType.ForcedEmpty)
+	
+	for y in range(_map.height):
+		_map.set_item_xy(0, y, Enums.TileType.ForcedEmpty)
+		_map.set_item_xy(_map.width - 1, y, Enums.TileType.ForcedEmpty)
 	
 	var player_coord = Vector2i(_map.width, _map.height) / 2
 	_map.mark_item(player_coord)
@@ -116,3 +124,4 @@ func _create_new_block():
 	
 	_block = Tools.rand_item(block_scenes).instantiate()
 	Globals.overlay_container.add_child(_block)
+	_block.setup(randf() < 0.5)

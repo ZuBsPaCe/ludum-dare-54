@@ -11,6 +11,7 @@ const SETTING_SOUND_VOLUME := "Sound"
 
 const GROUP_PLAYER := "Player"
 const GROUP_MONSTER := "Monster"
+const GROUP_BLOCK_TILE := "BlockTile"
 
 
 var _center_node: Node2D
