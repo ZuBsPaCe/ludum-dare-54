@@ -1,5 +1,8 @@
 extends Node
 
+@export var block_valid_color: Color
+@export var block_invalid_color: Color
+
 
 @onready var _main_menu := $MainMenu
 @onready var _game_overlay := $GameOverlay
@@ -11,9 +14,12 @@ extends Node
 
 func _ready():
 	Globals.setup(
-		get_node("%EntityContainer")
+		get_node("%EntityContainer"),
+		get_node("%OverlayContainer"),
+		block_valid_color,
+		block_invalid_color
 	)
-	State.setup()
+	State.setup(get_node("%Tilemap"))
 	
 	set_fullscreen(Globals.get_setting(Globals.SETTING_FULLSCREEN))
 	

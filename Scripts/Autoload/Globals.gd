@@ -19,6 +19,10 @@ signal change_volume_requested(music_factor, sound_factor)
 
 
 var entity_container: Node2D
+var overlay_container: Node2D
+
+var block_valid_color: Color
+var block_invalid_color: Color
 
 
 func _ready():
@@ -27,9 +31,16 @@ func _ready():
 
 
 func setup(
-	p_entity_container: Node2D):
+	p_entity_container: Node2D,
+	p_overlay_container: Node2D,
+	p_block_valid_color: Color,
+	p_block_invalid_color: Color):
 	
 	entity_container = p_entity_container
+	overlay_container = p_overlay_container
+	
+	block_valid_color = p_block_valid_color
+	block_invalid_color = p_block_invalid_color
 	
 	var screen_size := DisplayServer.screen_get_size()
 	

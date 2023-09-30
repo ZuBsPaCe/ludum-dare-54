@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 
 func _physics_process(delta):
-	var player_vec := State.player.position - position
+	var player_vec := State.player_pos - position
 	var move_vec := player_vec.normalized() * speed
 	
 	velocity = move_vec

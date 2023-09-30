@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://r30r20pijuq4"]
+
+[ext_resource type="Script" path="res://Scripts/Block.gd" id="1_32fr2"]
+[ext_resource type="Texture2D" uid="uid://csucj602p3eyf" path="res://Objects/Tilemap/Tile.png" id="2_q5prh"]
+
+[node name="Block4" type="Node2D"]
+script = ExtResource("1_32fr2")
+tile_offsets = Array[Vector2i]([Vector2i(0, 0), Vector2i(-1, 0), Vector2i(0, -1), Vector2i(-1, -1)])
+special_offset = true
+
+[node name="Tile1" type="Sprite2D" parent="."]
+position = Vector2(-64, -64)
+texture = ExtResource("2_q5prh")
+
+[node name="Tile3" type="Sprite2D" parent="."]
+position = Vector2(-64, 0)
+texture = ExtResource("2_q5prh")
+
+[node name="Tile4" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = ExtResource("2_q5prh")
+
+[node name="Tile2" type="Sprite2D" parent="."]
+texture = ExtResource("2_q5prh")

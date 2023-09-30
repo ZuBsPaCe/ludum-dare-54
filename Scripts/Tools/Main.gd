@@ -45,7 +45,6 @@ func _on_GameStateMachine_enter_state():
 			get_tree().paused = false
 			Effects.shake(Vector2.RIGHT)
 			
-			State.on_game_start()
 			await _game.start(_runner)
 			_process.show_game_overlay(0.5)
 			
