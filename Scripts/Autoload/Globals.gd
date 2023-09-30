@@ -9,6 +9,9 @@ const SETTING_WINDOW_HEIGHT := "Window Height"
 const SETTING_MUSIC_VOLUME := "Music"
 const SETTING_SOUND_VOLUME := "Sound"
 
+const GROUP_PLAYER := "Player"
+const GROUP_MONSTER := "Monster"
+
 
 var _center_node: Node2D
 var _settings: Dictionary
@@ -24,6 +27,8 @@ var overlay_container: Node2D
 var block_valid_color: Color
 var block_invalid_color: Color
 
+var heart_color: Color
+
 
 func _ready():
 	_center_node = Node2D.new()
@@ -34,13 +39,15 @@ func setup(
 	p_entity_container: Node2D,
 	p_overlay_container: Node2D,
 	p_block_valid_color: Color,
-	p_block_invalid_color: Color):
+	p_block_invalid_color: Color,
+	p_heart_color: Color):
 	
 	entity_container = p_entity_container
 	overlay_container = p_overlay_container
 	
 	block_valid_color = p_block_valid_color
 	block_invalid_color = p_block_invalid_color
+	heart_color = p_heart_color
 	
 	var screen_size := DisplayServer.screen_get_size()
 	

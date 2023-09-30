@@ -5,6 +5,7 @@ const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").G
 
 @export var player_scene: PackedScene
 @export var monster_scene: PackedScene
+@export var spawn_scene: PackedScene
 
 @export var block_scenes: Array[PackedScene]
 
@@ -14,11 +15,27 @@ var _map: Map
 
 var _block: Block
 
+var _runner: Runner
+
+var _spawn_cooldown := Cooldown.new()
+
 
 var game_running := false
 func _ready():
 	Effects.setup($Camera2D)
+	
+	State.setup(
+		$Tilemap,
+		player_scene,
+		monster_scene,
+		spawn_scene)
+	
+	Globals.switch_game_state_requested.connect(_on_switch_game_state_requested)
 
+
+func _on_switch_game_state_requested(new_state):
+	if new_state != Enums.GameState.GAME:
+		game_running = false
 
 
 func _process(delta):
@@ -36,11 +53,16 @@ func _process(delta):
 		if _block.valid and Input.is_action_just_pressed("left_click"):
 			_block.apply()
 			_create_new_block()
+			
+		if _spawn_cooldown.done:
+			State.add_spawn_group()
+			_spawn_cooldown.restart()
 
 
 # Can yield
 func start(runner: Runner):
 	game_running = false
+	_runner = runner
 	
 #	runner.create_tween(self).tween_property($Dummy, "position", Vector2(Tools.get_visible_rect().get_center()), 1.0)
 #	if !await runner.proceed:
@@ -49,6 +71,9 @@ func start(runner: Runner):
 #	runner.create_timer(self, 1.0)
 #	if !await runner.proceed:
 #		return
+
+	State.on_game_reset()
+	
 	
 	var viewport_size := get_viewport_rect().size
 
@@ -70,27 +95,18 @@ func start(runner: Runner):
 	player.position = Tools.to_center_pos(Vector2i(_map.width, _map.height) / 2)
 	Globals.entity_container.add_child(player)
 	
-	for i in range(10):
-		while true:
-			var rand_coord := Vector2i(randi_range(0, _map.width - 1), randi_range(0, _map.height - 1))
-			if _map.get_item(rand_coord) == Enums.TileType.Ground && !_map.is_marked(rand_coord):
-				_map.mark_item(rand_coord)
-				var monster = monster_scene.instantiate()
-				monster.position = Tools.to_center_pos(rand_coord)
-				Globals.entity_container.add_child(monster)
-				break
-	
 	_map.clear_marks()
 	
 	State.on_game_start(
+		_runner,
 		_map,
 		player)
 
 	_create_new_block()
 	
+	_spawn_cooldown.setup(self, 5, false)
+	
 	game_running = true
-
-
 
 
 

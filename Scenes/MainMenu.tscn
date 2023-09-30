@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://ke83lndodr8n"]
 
 [ext_resource type="Theme" uid="uid://bufd87u2vo210" path="res://Theme/MyTheme.tres" id="1"]
-[ext_resource type="Script" path="res://Scripts/Tools/Examples/ExampleMainMenu.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_t2qxo"]
 
 [node name="MainMenu" type="CanvasLayer"]
-script = ExtResource("2")
+script = ExtResource("1_t2qxo")
 
 [node name="Root" type="MarginContainer" parent="."]
 anchors_preset = 15

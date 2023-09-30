@@ -2,12 +2,16 @@ extends CharacterBody2D
 
 @export var speed := 200.0
 
+@onready var _hit_area := $HitArea
+
+var _hit_cooldown := Cooldown.new()
+var _dead := false
 
 func _ready():
-	pass
+	_hit_cooldown.setup(self, 2, true)
 
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	var move_vec := Vector2()
 	
 	if Input.is_action_pressed("up"):
@@ -32,3 +36,13 @@ func _physics_process(delta):
 	
 	velocity = move_vec
 	move_and_slide()
+	
+	if _hit_cooldown.done:
+		if _hit_area.has_overlapping_bodies():
+			if State.decrease_health() > 0:
+				_hit_cooldown.restart()
+			else:
+				set_physics_process(false)
+				Globals.switch_game_state(Enums.GameState.DEAD)
+			
+

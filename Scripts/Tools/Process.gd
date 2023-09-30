@@ -2,14 +2,17 @@ extends Node
 
 @export var block_valid_color: Color
 @export var block_invalid_color: Color
+@export var heart_color: Color
 
 
 @onready var _main_menu := $MainMenu
 @onready var _game_overlay := $GameOverlay
+@onready var _death_overlay := $DeathOverlay
 
 @onready var _modulate_game_overlay := ModulateTween.new($GameOverlay, Color.TRANSPARENT)
 @onready var _modulate_transition_overlay := ModulateTween.new($TransitionOverlay, Color.BLACK)
 @onready var _modulate_main_menu := ModulateTween.new($MainMenu, Color.TRANSPARENT)
+@onready var _modulate_death_overlay := ModulateTween.new($DeathOverlay, Color.TRANSPARENT)
 
 
 func _ready():
@@ -17,9 +20,9 @@ func _ready():
 		get_node("%EntityContainer"),
 		get_node("%OverlayContainer"),
 		block_valid_color,
-		block_invalid_color
+		block_invalid_color,
+		heart_color
 	)
-	State.setup(get_node("%Tilemap"))
 	
 	set_fullscreen(Globals.get_setting(Globals.SETTING_FULLSCREEN))
 	
@@ -29,6 +32,7 @@ func _ready():
 	
 	_main_menu.visible = false
 	_game_overlay.visible = false
+	_death_overlay.visible = false
 	
 	Globals.change_volume_requested.connect(change_volume)
 	
@@ -65,7 +69,16 @@ func show_game_overlay(duration: float):
 # Can yield
 func hide_game_overlay(duration: float):
 	await _modulate_game_overlay.tween(Color.TRANSPARENT, duration)
-	
+
+
+# Can yield
+func show_death_overlay(duration: float):
+	await _modulate_death_overlay.tween(Color.WHITE, duration)
+
+# Can yield
+func hide_death_overlay(duration: float):
+	await _modulate_death_overlay.tween(Color.TRANSPARENT, duration)
+
 
 func on_viewport_resized():	
 	if !Tools.is_fullscreen():

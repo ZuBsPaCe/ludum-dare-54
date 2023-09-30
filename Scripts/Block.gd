@@ -12,7 +12,11 @@ var _rotation_counter := 0
 var _rotated_offsets: Array[Vector2i]
 var _mouse_coord: Vector2i
 
+var _area: Area2D
+
 func _ready():
+	_area = get_node("Area2D")
+	
 	_rotated_offsets = tile_offsets.duplicate()
 	
 	if !special_offset:
@@ -77,6 +81,11 @@ func update_mouse_pos(mouse_pos: Vector2):
 		valid = false
 	
 	if valid:
+		for body in _area.get_overlapping_bodies():
+			if body.is_in_group(Globals.GROUP_PLAYER):
+				valid = false
+	
+	if valid:
 		modulate = Globals.block_valid_color
 	else:
 		modulate = Globals.block_invalid_color
@@ -85,3 +94,9 @@ func update_mouse_pos(mouse_pos: Vector2):
 func apply():
 	for offset in _rotated_offsets:
 		State.set_tile(_mouse_coord + offset, Enums.TileType.Wall)
+	
+	for body in _area.get_overlapping_bodies():
+		if body.is_in_group(Globals.GROUP_MONSTER):
+			body.queue_free()
+	
+	

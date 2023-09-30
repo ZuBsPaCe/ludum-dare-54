@@ -1,9 +1,7 @@
 extends Node
 
-const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
 
-
-@export var _initial_game_state := GameState.MAIN_MENU
+@export var _initial_game_state := Enums.GameState.MAIN_MENU
 
 
 @onready var _game_state := $GameState
@@ -34,11 +32,11 @@ func switch_game_state(new_state):
 
 func _on_GameStateMachine_enter_state():
 	match _game_state.current:
-		GameState.MAIN_MENU:
+		Enums.GameState.MAIN_MENU:
 			get_tree().paused = true
 			_process.show_main_menu(0.5)
 
-		GameState.GAME:
+		Enums.GameState.GAME:
 			_runner.abort()
 			_runner = Runner.new()
 			
@@ -48,7 +46,8 @@ func _on_GameStateMachine_enter_state():
 			await _game.start(_runner)
 			_process.show_game_overlay(0.5)
 			
-			
+		Enums.GameState.DEAD:
+			_process.show_death_overlay(0.5)
 
 		_:
 			assert(false, "Unknown game state")
@@ -56,12 +55,14 @@ func _on_GameStateMachine_enter_state():
 
 func _on_GameStateMachine_exit_state():
 	match _game_state.current:
-		GameState.MAIN_MENU:
+		Enums.GameState.MAIN_MENU:
 			_process.hide_main_menu(0.5)
 
-		GameState.GAME:
-			State.on_game_stopped()
+		Enums.GameState.GAME:
 			_process.hide_game_overlay(0.5)
+		
+		Enums.GameState.DEAD:
+			_process.hide_death_overlay(0.5)
 
 		_:
 			assert(false, "Unknown game state")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ta3rx0s4lpew"]
+
+[ext_resource type="Texture2D" uid="uid://gqg11i6bt03v" path="res://Objects/Spawn/Spawn.png" id="1_1jbol"]
+[ext_resource type="Script" path="res://Scripts/Spawn.gd" id="1_vlwhe"]
+
+[node name="Spawn" type="Node2D"]
+script = ExtResource("1_vlwhe")
+
+[node name="Spawn" type="Sprite2D" parent="."]
+modulate = Color(1, 0.266667, 0.266667, 1)
+texture = ExtResource("1_1jbol")
