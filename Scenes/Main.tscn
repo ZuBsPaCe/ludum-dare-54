@@ -54,7 +54,17 @@ process_mode = 3
 script = ExtResource("3_td4ku")
 cloud_scene = ExtResource("4_4ri8c")
 
-[node name="Game" type="Node2D" parent="."]
+[node name="GroundTilemap" type="TileMap" parent="."]
+unique_name_in_owner = true
+use_parent_material = true
+tile_set = ExtResource("16_8fx2e")
+format = 2
+layer_0/tile_data = PackedInt32Array(524298, 196608, 5, 589834, 65536, 5, 655370, 196608, 5, 524306, 131072, 5, 589842, 131072, 5, 655378, 0, 5, 524307, 196608, 5, 589843, 196608, 5, 655379, 131072, 5, 524299, 196608, 5, 589835, 196608, 5, 655371, 0, 5, 524300, 65536, 5, 589836, 196608, 5, 655372, 131072, 5, 524305, 131072, 5, 589841, 65536, 5, 655377, 196608, 5)
+
+[node name="CanvasModulate2" type="CanvasModulate" parent="."]
+color = Color(0.835294, 0.835294, 0.835294, 1)
+
+[node name="Game" type="CanvasLayer" parent="."]
 process_mode = 1
 editor_description = "Nodes in Game will not run while the game is paused. This affects _process(), _input() and _unhandled_input(). Add game logic, ingame ui, levels and ingame sound here."
 script = ExtResource("3_kenll")
@@ -67,11 +77,8 @@ spawn_scene = ExtResource("6_me2ip")
 flag_scene = ExtResource("9_ir1j8")
 block_scenes = Array[PackedScene]([ExtResource("6_m2m16"), ExtResource("7_7wolc"), ExtResource("8_5jqpj"), ExtResource("9_th4os"), ExtResource("10_y2qfy"), ExtResource("11_clxab"), ExtResource("12_bfsv6")])
 
-[node name="GroundTilemap" type="TileMap" parent="Game"]
+[node name="Helper" type="Node2D" parent="Game"]
 unique_name_in_owner = true
-tile_set = ExtResource("16_8fx2e")
-format = 2
-layer_0/tile_data = PackedInt32Array(524298, 196608, 5, 589834, 65536, 5, 655370, 196608, 5, 524306, 131072, 5, 589842, 131072, 5, 655378, 0, 5, 524307, 196608, 5, 589843, 196608, 5, 655379, 131072, 5, 524299, 196608, 5, 589835, 196608, 5, 655371, 0, 5, 524300, 65536, 5, 589836, 196608, 5, 655372, 131072, 5, 524305, 131072, 5, 589841, 65536, 5, 655377, 196608, 5)
 
 [node name="WallTilemap" type="TileMap" parent="Game"]
 unique_name_in_owner = true
@@ -91,6 +98,9 @@ script = ExtResource("2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Game"]
 environment = SubResource("1")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Game"]
+color = Color(0.835294, 0.835294, 0.835294, 1)
 
 [node name="Process" type="Node" parent="."]
 process_mode = 3

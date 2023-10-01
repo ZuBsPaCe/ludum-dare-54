@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://51g21iwaqggp"]
+[gd_scene load_steps=19 format=3 uid="uid://51g21iwaqggp"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_86h85"]
 [ext_resource type="Texture2D" uid="uid://be6q1olce5bax" path="res://Objects/Player/export/Player/LeftLeg.png" id="3_d3do8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://da36xei5by80y" path="res://Objects/Player/export/Player/RightArm.png" id="8_a6tuy"]
 [ext_resource type="Texture2D" uid="uid://ym2bsr5prgur" path="res://Objects/Player/export/Player/Head.png" id="9_q8hh2"]
 [ext_resource type="Texture2D" uid="uid://b87cnpk4efrdj" path="res://Objects/Player/export/Player/Face.png" id="10_gkxa2"]
+[ext_resource type="Texture2D" uid="uid://b5o4g7eoqvsyu" path="res://Sprites/Light/PointLight_1024.png" id="11_8u8p0"]
 [ext_resource type="Texture2D" uid="uid://myl4joa4ipy1" path="res://Objects/Player/export/Player/Hair.png" id="11_fb5su"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r17rq"]
@@ -1525,3 +1526,9 @@ autoplay = "Idle"
 libraries = {
 "": SubResource("AnimationLibrary_d1vya")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("11_8u8p0")
+texture_scale = 4.0

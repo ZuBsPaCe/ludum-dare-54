@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dcgfwtubdb1ph"]
+[gd_scene load_steps=21 format=3 uid="uid://dcgfwtubdb1ph"]
 
 [ext_resource type="Script" path="res://Scripts/Monster.gd" id="1_80qp0"]
 [ext_resource type="Texture2D" uid="uid://qnve6xwxvx55" path="res://Objects/Monster/Dragon/export/Glow.png" id="2_hy81c"]
@@ -287,6 +287,9 @@ _data = {
 "RESET": SubResource("Animation_qpgkk")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_optii"]
+polygon = PackedVector2Array(-7, -3, -3, 0, 3, 0, 6, -2, 4, -5, 0, -6, -4, -6)
+
 [node name="Dragon" type="CharacterBody2D" groups=["Monster"]]
 collision_layer = 4
 collision_mask = 7
@@ -365,7 +368,7 @@ frame = 1
 
 [node name="ScaleMiddle" type="Node2D" parent="Sprites/Fire"]
 modulate = Color(1, 0.231373, 0.898039, 1)
-position = Vector2(1.14547, 0)
+position = Vector2(2, 0)
 
 [node name="Scale1Fill" type="Sprite2D" parent="Sprites/Fire/ScaleMiddle"]
 position = Vector2(-8, -39)
@@ -377,7 +380,7 @@ texture = ExtResource("6_xnb7m")
 
 [node name="ScaleBottom" type="Node2D" parent="Sprites/Fire"]
 modulate = Color(1, 0.231373, 0.898039, 1)
-position = Vector2(1.74547, 0)
+position = Vector2(1.25, 0)
 
 [node name="Scale2" type="Sprite2D" parent="Sprites/Fire/ScaleBottom"]
 position = Vector2(-7, -28)
@@ -389,7 +392,7 @@ texture = ExtResource("9_lgoqn")
 
 [node name="ScaleTop" type="Node2D" parent="Sprites/Fire"]
 modulate = Color(1, 0.231373, 0.898039, 1)
-position = Vector2(2.68594, 1.84297)
+position = Vector2(1.90909, 1.45455)
 
 [node name="Scale3" type="Sprite2D" parent="Sprites/Fire/ScaleTop"]
 position = Vector2(-3, -49)
@@ -421,3 +424,6 @@ autoplay = "Idle"
 libraries = {
 "": SubResource("AnimationLibrary_m7wio")
 }
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_optii")

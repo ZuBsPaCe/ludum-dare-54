@@ -318,6 +318,7 @@ func add_monster(coord: Vector2i, monster_type):
 			return
 	
 	monster.position = Tools.to_center_pos(coord)
+	monster.setup(_runner)
 	Globals.entity_container.add_child(monster)
 
 func add_bullet(pos: Vector2, dir: Vector2):

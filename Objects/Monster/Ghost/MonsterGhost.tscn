@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://453po80bwdqj"]
+[gd_scene load_steps=15 format=3 uid="uid://453po80bwdqj"]
 
 [ext_resource type="Script" path="res://Scripts/Monster.gd" id="1_c6tvn"]
 [ext_resource type="Texture2D" uid="uid://bk2su0s7dyatx" path="res://Objects/Monster/Ghost/export/Glow.png" id="3_iyhjy"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dexh336bp1fvy" path="res://Objects/Monster/Ghost/export/Face.png" id="8_nr0p2"]
 [ext_resource type="Texture2D" uid="uid://bvr6c7wls5bqq" path="res://Objects/Monster/Ghost/export/RightArm.png" id="9_e4yif"]
 [ext_resource type="Texture2D" uid="uid://duer0nwrwlx2d" path="res://Objects/Monster/Ghost/export/RightArmFill.png" id="10_igvf1"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g2487"]
+polygon = PackedVector2Array(-12, 0, -3, 4, 6, 3, 11, -1, 8, -5, 1, -6, -5, -5, -11, -3)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mddwn"]
 radius = 12.0
@@ -300,6 +303,10 @@ texture = ExtResource("6_2jnn8")
 [node name="Body" type="Sprite2D" parent="Sprites"]
 position = Vector2(2, -17)
 texture = ExtResource("7_0f51m")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprites/Body"]
+position = Vector2(-2, 12)
+occluder = SubResource("OccluderPolygon2D_g2487")
 
 [node name="Face" type="Sprite2D" parent="Sprites"]
 position = Vector2(-7, -25)

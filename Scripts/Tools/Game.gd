@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 
 const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
@@ -12,6 +12,10 @@ const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").G
 @export var flag_scene: PackedScene
 
 @export var block_scenes: Array[PackedScene]
+
+@onready var helper:= $%Helper
+@onready var ground_tilemap := $%GroundTilemap
+@onready var wall_tilemap := $%WallTilemap
 
 var _map: Map
 
@@ -32,15 +36,17 @@ var _predefined_blocks_index := 0
 var _predefined_blocks_callback: Callable
 
 
+
+
 func _ready():
 	Effects.setup($Camera2D)
 	
-	$WallTilemap.clear()
-	$GroundTilemap.clear()
+	wall_tilemap.clear()
+	ground_tilemap.clear()
 	
 	State.setup(
-		$WallTilemap,
-		$GroundTilemap,
+		wall_tilemap,
+		ground_tilemap,
 		player_scene,
 		slime_scene,
 		dragon_scene,
@@ -64,7 +70,7 @@ func _process(delta):
 			if !State.block_disabled:
 				_block.visible = true
 			
-				var mouse_pos := get_global_mouse_position()
+				var mouse_pos :Vector2= helper.get_global_mouse_position()
 				var mouse_coord := Tools.to_coord(mouse_pos)
 				
 				if _can_toggle_block_up and Input.is_action_just_pressed("toggle_block_up") and _block_cooldown.done:
@@ -117,7 +123,7 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 
 	State.on_game_reset()
 	
-	var viewport_size := get_viewport_rect().size
+	var viewport_size :Vector2= helper.get_viewport_rect().size
 	_map = Map.new(viewport_size.x / Globals.TILE_SIZE, viewport_size.y / Globals.TILE_SIZE)
 	
 	var player: CharacterBody2D
