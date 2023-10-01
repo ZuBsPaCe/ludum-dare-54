@@ -58,6 +58,10 @@ func _physics_process(delta):
 	
 	if _hit_cooldown.done:
 		if _hit_area.has_overlapping_bodies():
+			for body in _hit_area.get_overlapping_bodies():
+				if body.is_in_group(Globals.GROUP_BULLET):
+					body.queue_free()
+			
 			if State.decrease_health() > 0:
 				_hit_cooldown.restart()
 			else:

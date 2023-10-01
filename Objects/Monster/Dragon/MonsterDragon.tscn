@@ -1,0 +1,423 @@
+[gd_scene load_steps=20 format=3 uid="uid://dcgfwtubdb1ph"]
+
+[ext_resource type="Script" path="res://Scripts/Monster.gd" id="1_80qp0"]
+[ext_resource type="Texture2D" uid="uid://qnve6xwxvx55" path="res://Objects/Monster/Dragon/export/Glow.png" id="2_hy81c"]
+[ext_resource type="Texture2D" uid="uid://bc2i5mi13te6m" path="res://Objects/Monster/Dragon/export/Normal/Face.png" id="3_jpaj2"]
+[ext_resource type="Texture2D" uid="uid://be68vr61lnqb4" path="res://Objects/Monster/Dragon/export/Normal/Head.png" id="4_qh0ux"]
+[ext_resource type="Texture2D" uid="uid://cegk3mm86moh3" path="res://Objects/Monster/Dragon/export/Normal/HeadFill.png" id="5_qnn0q"]
+[ext_resource type="Texture2D" uid="uid://bjy4bekupvqu7" path="res://Objects/Monster/Dragon/export/Normal/Scale1.png" id="6_xnb7m"]
+[ext_resource type="Texture2D" uid="uid://jgii7oq6u0k6" path="res://Objects/Monster/Dragon/export/Normal/Scale1Fill.png" id="7_wyvho"]
+[ext_resource type="Texture2D" uid="uid://dfpuheni8tumd" path="res://Objects/Monster/Dragon/export/Normal/Scale2.png" id="8_mx4rp"]
+[ext_resource type="Texture2D" uid="uid://cuoopthu358tf" path="res://Objects/Monster/Dragon/export/Normal/Scale2Fill.png" id="9_lgoqn"]
+[ext_resource type="Texture2D" uid="uid://d0yl7ajwdr2xx" path="res://Objects/Monster/Dragon/export/Normal/Scale3.png" id="10_1s11o"]
+[ext_resource type="Texture2D" uid="uid://c3x12sdknlu3i" path="res://Objects/Monster/Dragon/export/Fire/FaceFire.png" id="11_fcg5j"]
+[ext_resource type="Texture2D" uid="uid://c6nl8ulgvi6h5" path="res://Objects/Monster/Dragon/export/Normal/Scale3Fill.png" id="11_ksxhl"]
+[ext_resource type="Texture2D" uid="uid://yarveo6kbifd" path="res://Objects/Monster/Dragon/export/Fire/HeadFire.png" id="12_lq2dy"]
+[ext_resource type="Texture2D" uid="uid://ilvichfne04i" path="res://Objects/Monster/Dragon/export/Fire/HeadFireFill.png" id="13_wsaxs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_857wh"]
+
+[sub_resource type="Animation" id="Animation_eq4mx"]
+resource_name = "Fire"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Normal:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Fire:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Fire/ScaleMiddle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 0), Vector2(0, 0), Vector2(2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Fire/ScaleMiddle:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Fire/ScaleBottom:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.65, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.25, 0), Vector2(2, 0), Vector2(0, 0), Vector2(1.4, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/Fire/ScaleBottom:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/Fire/ScaleTop:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.90909, 1.45455), Vector2(3, 2), Vector2(1, 1), Vector2(1.8, 1.4)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Fire/ScaleTop:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_qmrkb"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Normal:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Fire:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Normal/ScaleMiddle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 0), Vector2(0, 0), Vector2(2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Normal/ScaleMiddle:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Normal/ScaleBottom:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.65, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.25, 0), Vector2(2, 0), Vector2(0, 0), Vector2(1.4, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/Normal/ScaleBottom:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/Normal/ScaleTop:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.90909, 1.45455), Vector2(3, 2), Vector2(1, 1), Vector2(1.8, 1.4)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Normal/ScaleTop:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_qpgkk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Fire:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Normal/ScaleTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Normal/ScaleMiddle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Normal/ScaleBottom:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Normal:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m7wio"]
+_data = {
+"Fire": SubResource("Animation_eq4mx"),
+"Idle": SubResource("Animation_qmrkb"),
+"RESET": SubResource("Animation_qpgkk")
+}
+
+[node name="Dragon" type="CharacterBody2D" groups=["Monster"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_80qp0")
+monster_type = 1
+
+[node name="Sprites" type="Sprite2D" parent="."]
+
+[node name="Normal" type="Node2D" parent="Sprites"]
+visible = false
+
+[node name="Glow" type="Sprite2D" parent="Sprites/Normal"]
+modulate = Color(1, 1, 1, 0.2)
+position = Vector2(4, -28)
+texture = ExtResource("2_hy81c")
+hframes = 2
+
+[node name="ScaleMiddle" type="Node2D" parent="Sprites/Normal"]
+modulate = Color(1, 0.231373, 0.898039, 1)
+position = Vector2(2, 0)
+
+[node name="Scale1Fill" type="Sprite2D" parent="Sprites/Normal/ScaleMiddle"]
+position = Vector2(-8, -39)
+texture = ExtResource("7_wyvho")
+
+[node name="Scale1" type="Sprite2D" parent="Sprites/Normal/ScaleMiddle"]
+position = Vector2(-8, -39)
+texture = ExtResource("6_xnb7m")
+
+[node name="ScaleBottom" type="Node2D" parent="Sprites/Normal"]
+modulate = Color(1, 0.231373, 0.898039, 1)
+position = Vector2(2, 0)
+
+[node name="Scale2" type="Sprite2D" parent="Sprites/Normal/ScaleBottom"]
+position = Vector2(-7, -28)
+texture = ExtResource("8_mx4rp")
+
+[node name="Scale2Fill" type="Sprite2D" parent="Sprites/Normal/ScaleBottom"]
+position = Vector2(-7, -28)
+texture = ExtResource("9_lgoqn")
+
+[node name="ScaleTop" type="Node2D" parent="Sprites/Normal"]
+modulate = Color(1, 0.231373, 0.898039, 1)
+position = Vector2(2, 1)
+
+[node name="Scale3" type="Sprite2D" parent="Sprites/Normal/ScaleTop"]
+position = Vector2(-3, -49)
+texture = ExtResource("10_1s11o")
+
+[node name="Scale3Fill" type="Sprite2D" parent="Sprites/Normal/ScaleTop"]
+position = Vector2(-3, -49)
+texture = ExtResource("11_ksxhl")
+
+[node name="HeadFill" type="Sprite2D" parent="Sprites/Normal"]
+modulate = Color(0.929412, 0.658824, 0.32549, 1)
+position = Vector2(4, -26)
+texture = ExtResource("5_qnn0q")
+
+[node name="Head" type="Sprite2D" parent="Sprites/Normal"]
+position = Vector2(4, -27)
+texture = ExtResource("4_qh0ux")
+
+[node name="Face" type="Sprite2D" parent="Sprites/Normal"]
+position = Vector2(6, -45)
+texture = ExtResource("3_jpaj2")
+
+[node name="Fire" type="Node2D" parent="Sprites"]
+visible = false
+
+[node name="Glow2" type="Sprite2D" parent="Sprites/Fire"]
+modulate = Color(1, 1, 1, 0.2)
+position = Vector2(2, -28)
+texture = ExtResource("2_hy81c")
+hframes = 2
+frame = 1
+
+[node name="ScaleMiddle" type="Node2D" parent="Sprites/Fire"]
+modulate = Color(1, 0.231373, 0.898039, 1)
+position = Vector2(1.14547, 0)
+
+[node name="Scale1Fill" type="Sprite2D" parent="Sprites/Fire/ScaleMiddle"]
+position = Vector2(-8, -39)
+texture = ExtResource("7_wyvho")
+
+[node name="Scale1" type="Sprite2D" parent="Sprites/Fire/ScaleMiddle"]
+position = Vector2(-8, -39)
+texture = ExtResource("6_xnb7m")
+
+[node name="ScaleBottom" type="Node2D" parent="Sprites/Fire"]
+modulate = Color(1, 0.231373, 0.898039, 1)
+position = Vector2(1.74547, 0)
+
+[node name="Scale2" type="Sprite2D" parent="Sprites/Fire/ScaleBottom"]
+position = Vector2(-7, -28)
+texture = ExtResource("8_mx4rp")
+
+[node name="Scale2Fill" type="Sprite2D" parent="Sprites/Fire/ScaleBottom"]
+position = Vector2(-7, -28)
+texture = ExtResource("9_lgoqn")
+
+[node name="ScaleTop" type="Node2D" parent="Sprites/Fire"]
+modulate = Color(1, 0.231373, 0.898039, 1)
+position = Vector2(2.68594, 1.84297)
+
+[node name="Scale3" type="Sprite2D" parent="Sprites/Fire/ScaleTop"]
+position = Vector2(-3, -49)
+texture = ExtResource("10_1s11o")
+
+[node name="Scale3Fill" type="Sprite2D" parent="Sprites/Fire/ScaleTop"]
+position = Vector2(-3, -49)
+texture = ExtResource("11_ksxhl")
+
+[node name="HeadFireFill" type="Sprite2D" parent="Sprites/Fire"]
+modulate = Color(0.929412, 0.658824, 0.32549, 1)
+position = Vector2(4, -26)
+texture = ExtResource("13_wsaxs")
+
+[node name="HeadFire" type="Sprite2D" parent="Sprites/Fire"]
+position = Vector2(4, -27)
+texture = ExtResource("12_lq2dy")
+
+[node name="FaceFire" type="Sprite2D" parent="Sprites/Fire"]
+position = Vector2(6, -44)
+texture = ExtResource("11_fcg5j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_857wh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_m7wio")
+}

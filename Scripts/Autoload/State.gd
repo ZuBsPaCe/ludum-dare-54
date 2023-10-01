@@ -1,8 +1,10 @@
 extends Node
 
 var _player_scene: PackedScene
-var _monster_scene: PackedScene
+var _slime_scene: PackedScene
+var _dragon_scene: PackedScene
 var _spawn_scene: PackedScene
+var _bullet_scene: PackedScene
 
 var _player: CharacterBody2D
 
@@ -44,12 +46,16 @@ func setup(
 		wall_tilemap: TileMap,
 		ground_tilemap: TileMap,
 		player_scene: PackedScene,
-		monster_scene: PackedScene,
+		slime_scene: PackedScene,
+		dragon_scene: PackedScene,
+		bullet_scene: PackedScene,
 		spawn_scene: PackedScene):
 	_wall_tilemap = wall_tilemap
 	_ground_tilemap = ground_tilemap
 	_player_scene = player_scene
-	_monster_scene = monster_scene
+	_slime_scene = slime_scene
+	_dragon_scene = dragon_scene
+	_bullet_scene = bullet_scene
 	_spawn_scene = spawn_scene
 
 
@@ -232,25 +238,48 @@ func _init_spawn_groups():
 func add_spawn_group() -> void:
 	var coords: Array[Vector2i] = Tools.rand_item(_spawn_group_funcs).call()
 	
+	
+	var monster_types := [
+		Enums.MonsterType.Slime,
+		Enums.MonsterType.Dragon
+	]
+	
+	var monster_type = Tools.rand_item(monster_types)
+	
 	for coord in coords:
-		add_spawn(_runner, coord)
+		add_spawn(_runner, monster_type, coord)
 
 
-func add_spawn(runner: Runner, coord: Vector2i):
+func add_spawn(runner: Runner, monster_type, coord: Vector2i):
 	var spawn = _spawn_scene.instantiate()
-	spawn.setup(runner, coord, 3.0)
+	spawn.setup(runner, monster_type, coord, 3.0)
 	spawn.position = Tools.to_center_pos(coord)
 	Globals.entity_container.add_child(spawn)
 
 
 
-func add_monster(coord: Vector2i):
+func add_monster(coord: Vector2i, monster_type):
 	if !is_tile(coord, Enums.TileType.Ground):
 		return
 	
-	var monster = _monster_scene.instantiate()
+	var monster
+	match monster_type:
+		Enums.MonsterType.Slime:
+			monster = _slime_scene.instantiate()
+		Enums.MonsterType.Dragon:
+			monster = _dragon_scene.instantiate()
+		_:
+			printerr("Unknown Monstertype")
+			return
+	
 	monster.position = Tools.to_center_pos(coord)
 	Globals.entity_container.add_child(monster)
+
+func add_bullet(pos: Vector2, dir: Vector2):
+	var bullet := _bullet_scene.instantiate()
+	bullet.position = pos
+	Globals.entity_container.add_child(bullet)
+	bullet.setup(dir)
 
 
 func increase_health() -> int:

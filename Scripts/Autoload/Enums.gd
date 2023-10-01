@@ -48,3 +48,9 @@ enum Difficulty {
 	Normal,
 	Hard
 }
+
+
+enum MonsterType {
+	Slime,
+	Dragon
+}

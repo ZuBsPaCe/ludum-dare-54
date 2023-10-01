@@ -504,10 +504,12 @@ scale = Vector2(0.935916, 0.919766)
 texture = ExtResource("2_7bewi")
 
 [node name="LowerScale" type="Sprite2D" parent="Sprites/Body"]
+modulate = Color(0.478431, 1, 0.635294, 1)
 position = Vector2(-14, -15)
 texture = ExtResource("3_duf8e")
 
 [node name="UpperScale" type="Sprite2D" parent="Sprites/Body"]
+modulate = Color(0.478431, 1, 0.635294, 1)
 position = Vector2(-1, -23)
 rotation = 0.115755
 texture = ExtResource("4_jsnas")
@@ -515,6 +517,7 @@ texture = ExtResource("4_jsnas")
 [node name="Body" type="Node2D" parent="Sprites/Body"]
 
 [node name="Body" type="Sprite2D" parent="Sprites/Body/Body"]
+modulate = Color(0.768627, 0.239216, 0.239216, 1)
 position = Vector2(0, -10)
 scale = Vector2(1.06703, 0.833583)
 texture = ExtResource("5_gdhc6")

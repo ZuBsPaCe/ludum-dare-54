@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2pylccdpav6s"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_6106b"]
+[ext_resource type="Texture2D" uid="uid://dswbxgvdyv7sb" path="res://Objects/Bullet/export/Fill.png" id="1_ktfnc"]
+[ext_resource type="Texture2D" uid="uid://cy57ec4p7gy7" path="res://Objects/Bullet/export/Outline.png" id="2_o02bw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm1rr"]
+radius = 6.0
+
+[node name="Bullet" type="CharacterBody2D" groups=["Bullet"]]
+collision_layer = 32
+script = ExtResource("1_6106b")
+
+[node name="Fill" type="Sprite2D" parent="."]
+modulate = Color(0.952941, 1, 0.788235, 1)
+texture = ExtResource("1_ktfnc")
+
+[node name="Outline" type="Sprite2D" parent="."]
+modulate = Color(0.639216, 0.0901961, 0.0901961, 1)
+texture = ExtResource("2_o02bw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fm1rr")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bjtkbwi2b87ws"]
+[gd_scene load_steps=29 format=3 uid="uid://bjtkbwi2b87ws"]
 
 [ext_resource type="Script" path="res://Scripts/Tools/Main.gd" id="1_jlg1y"]
 [ext_resource type="Script" path="res://Scripts/Tools/CameraShake.gd" id="2"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://d3clocpmejs8o" path="res://Objects/Tilemap/Block2.tscn" id="7_7wolc"]
 [ext_resource type="PackedScene" uid="uid://c3nl7qrkm777s" path="res://Objects/Monster/MonsterSlime.tscn" id="7_30qlw"]
 [ext_resource type="PackedScene" uid="uid://b50827npty5vl" path="res://Objects/Tilemap/Block3.tscn" id="8_5jqpj"]
+[ext_resource type="PackedScene" uid="uid://dcgfwtubdb1ph" path="res://Objects/Monster/Dragon/MonsterDragon.tscn" id="8_17p7e"]
+[ext_resource type="PackedScene" uid="uid://d2pylccdpav6s" path="res://Objects/Bullet/Bullet.tscn" id="9_8vtr3"]
 [ext_resource type="PackedScene" uid="uid://82li2qq3slxi" path="res://Objects/Flag/Flag.tscn" id="9_ir1j8"]
 [ext_resource type="PackedScene" uid="uid://r30r20pijuq4" path="res://Objects/Tilemap/Block4.tscn" id="9_th4os"]
 [ext_resource type="PackedScene" uid="uid://bnqkryx7vvxnj" path="res://Objects/Tilemap/Block5.tscn" id="10_y2qfy"]
@@ -55,7 +57,9 @@ process_mode = 1
 editor_description = "Nodes in Game will not run while the game is paused. This affects _process(), _input() and _unhandled_input(). Add game logic, ingame ui, levels and ingame sound here."
 script = ExtResource("3_kenll")
 player_scene = ExtResource("4_0phv3")
-monster_scene = ExtResource("7_30qlw")
+slime_scene = ExtResource("7_30qlw")
+dragon_scene = ExtResource("8_17p7e")
+bullet_scene = ExtResource("9_8vtr3")
 spawn_scene = ExtResource("6_me2ip")
 flag_scene = ExtResource("9_ir1j8")
 block_scenes = Array[PackedScene]([ExtResource("6_m2m16"), ExtResource("7_7wolc"), ExtResource("8_5jqpj"), ExtResource("9_th4os"), ExtResource("10_y2qfy"), ExtResource("11_clxab"), ExtResource("12_bfsv6")])
@@ -76,6 +80,7 @@ unique_name_in_owner = true
 
 [node name="EntityContainer" type="Node2D" parent="Game"]
 unique_name_in_owner = true
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="Game"]
 position = Vector2(960, 540)

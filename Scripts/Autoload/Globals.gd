@@ -14,6 +14,7 @@ const GROUP_PLAYER := "Player"
 const GROUP_MONSTER := "Monster"
 const GROUP_BLOCK_TILE := "BlockTile"
 const GROUP_FLAG := "Flag"
+const GROUP_BULLET := "Bullet"
 
 
 var _center_node: Node2D

@@ -5,3 +5,4 @@ Collision Layers:
 	3: Monsters
 	4: Empty Tiles
 	5: Flag
+	6: Bullet

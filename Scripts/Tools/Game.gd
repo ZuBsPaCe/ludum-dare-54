@@ -4,7 +4,9 @@ extends Node2D
 const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").GameState
 
 @export var player_scene: PackedScene
-@export var monster_scene: PackedScene
+@export var slime_scene: PackedScene
+@export var dragon_scene: PackedScene
+@export var bullet_scene: PackedScene
 @export var spawn_scene: PackedScene
 @export var flag_scene: PackedScene
 
@@ -39,7 +41,9 @@ func _ready():
 		$WallTilemap,
 		$GroundTilemap,
 		player_scene,
-		monster_scene,
+		slime_scene,
+		dragon_scene,
+		bullet_scene,
 		spawn_scene)
 	
 	Globals.switch_game_state_requested.connect(_on_switch_game_state_requested)
@@ -173,6 +177,7 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 		assert(tutorial_level >= 0)
 		
 		_can_toggle_block_up = false
+		#tutorial_level = 4
 		
 		if tutorial_level == 0:
 			_map.set_all(Enums.TileType.Empty)
@@ -450,7 +455,7 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 				_map.set_item(spawn_coords.pop_front(), Enums.TileType.Wall)
 			
 			for i in range(15):
-				State.add_spawn(_runner, spawn_coords.pop_front())
+				State.add_spawn(_runner, Enums.MonsterType.Dragon, spawn_coords.pop_front())
 			
 	
 			player = player_scene.instantiate()
