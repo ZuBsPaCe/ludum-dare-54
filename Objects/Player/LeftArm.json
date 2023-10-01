@@ -1,0 +1,63 @@
+{
+    "name": "LeftArm",
+    "nodes": [
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "LeftArmFill",
+            "node_path": "LeftArmFill",
+            "offset": [
+                -7.0,
+                9.5
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                1,
+                1
+            ],
+            "resource_path": "export\\Player\\LeftArm\\LeftArmFill.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": -1
+        },
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "LeftArm",
+            "node_path": "LeftArm",
+            "offset": [
+                -7.0,
+                9.5
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                0,
+                0
+            ],
+            "resource_path": "export\\Player\\LeftArm\\LeftArm.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": 0
+        }
+    ]
+}

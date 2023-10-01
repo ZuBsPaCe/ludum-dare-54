@@ -1,0 +1,63 @@
+{
+    "name": "RightArm",
+    "nodes": [
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "RightArmFill",
+            "node_path": "RightArmFill",
+            "offset": [
+                -5.5,
+                11.0
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                0,
+                3
+            ],
+            "resource_path": "export\\Player\\RightArm\\RightArmFill.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": -1
+        },
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "RightArm",
+            "node_path": "RightArm",
+            "offset": [
+                -5.5,
+                11.0
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                0,
+                0
+            ],
+            "resource_path": "export\\Player\\RightArm\\RightArm.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": 0
+        }
+    ]
+}

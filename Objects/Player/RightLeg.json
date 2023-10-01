@@ -1,0 +1,63 @@
+{
+    "name": "RightLeg",
+    "nodes": [
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "RightLegFill",
+            "node_path": "RightLegFill",
+            "offset": [
+                -5.0,
+                6.0
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                2,
+                0
+            ],
+            "resource_path": "export\\Player\\RightLeg\\RightLegFill.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": -1
+        },
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "RightLeg",
+            "node_path": "RightLeg",
+            "offset": [
+                -5.0,
+                6.0
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                0,
+                0
+            ],
+            "resource_path": "export\\Player\\RightLeg\\RightLeg.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": 0
+        }
+    ]
+}

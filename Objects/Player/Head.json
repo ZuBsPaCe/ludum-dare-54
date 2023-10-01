@@ -1,0 +1,63 @@
+{
+    "name": "Head",
+    "nodes": [
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "Head_Fill",
+            "node_path": "Head_Fill",
+            "offset": [
+                -15.5,
+                11.5
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                4,
+                0
+            ],
+            "resource_path": "export\\Player\\Head\\Head_Fill.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": -1
+        },
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "Head_Merged",
+            "node_path": "Head_Merged",
+            "offset": [
+                -15.5,
+                11.5
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                0,
+                12
+            ],
+            "resource_path": "export\\Player\\Head\\Head_Merged.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": 0
+        }
+    ]
+}

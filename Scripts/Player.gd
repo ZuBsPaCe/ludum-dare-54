@@ -3,12 +3,17 @@ extends CharacterBody2D
 @export var speed := 200.0
 
 @onready var _hit_area := $HitArea
+@onready var _glow := $%Glow
 
 var _hit_cooldown := Cooldown.new()
 var _dead := false
 
+var _headingLeft := true
+
 func _ready():
 	_hit_cooldown.setup(self, 2, true)
+	
+	_glow.modulate = Color(1, 1, 1, 0.2)
 
 
 func _physics_process(delta):	
@@ -25,6 +30,20 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("left"):
 		move_vec += Vector2.LEFT
+	
+	if move_vec.x > 0:
+		_headingLeft = false
+		$AnimationPlayer.play("RunRight")
+	elif move_vec.x < 0:
+		_headingLeft = true
+		$AnimationPlayer.play("RunLeft")
+	elif move_vec.y != 0:
+		if _headingLeft:
+			$AnimationPlayer.play("RunLeft")
+		else:
+			$AnimationPlayer.play("RunRight")
+	else:
+		$AnimationPlayer.play("Idle")
 	
 	move_vec = move_vec.normalized() * speed
 	
@@ -48,6 +67,7 @@ func _physics_process(delta):
 	if State.is_valid_tile(coord):
 		if State.is_tile(coord, Enums.TileType.Empty) or State.is_tile(coord, Enums.TileType.ForcedEmpty):
 			_die()
+
 
 func _die():
 	if _dead:

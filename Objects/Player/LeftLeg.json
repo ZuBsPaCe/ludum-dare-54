@@ -1,0 +1,63 @@
+{
+    "name": "LeftLeg",
+    "nodes": [
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "LeftLegFill",
+            "node_path": "LeftLegFill",
+            "offset": [
+                -5.0,
+                6.0
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                1,
+                0
+            ],
+            "resource_path": "export\\Player\\LeftLeg\\LeftLegFill.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": -1
+        },
+        {
+            "children": [],
+            "frame_index": 0,
+            "name": "LeftLeg",
+            "node_path": "LeftLeg",
+            "offset": [
+                -5.0,
+                6.0
+            ],
+            "opacity": 1.0,
+            "pivot_offset": [
+                0.0,
+                0.0
+            ],
+            "position": [
+                0,
+                0
+            ],
+            "resource_path": "export\\Player\\LeftLeg\\LeftLeg.png",
+            "rotation": 0.0,
+            "scale": [
+                1.0,
+                1.0
+            ],
+            "tiles_x": 1,
+            "tiles_y": 1,
+            "type": "SPRITE",
+            "z": 0
+        }
+    ]
+}
