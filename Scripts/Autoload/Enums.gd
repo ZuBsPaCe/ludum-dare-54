@@ -55,3 +55,12 @@ enum MonsterType {
 	Dragon,
 	Ghost
 }
+
+
+enum Sounds {
+	Block,
+	Bullet,
+	BulletHit,
+	Hurt,
+	Spawn
+}

@@ -30,7 +30,7 @@ var _grass_tops := [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 
 var _grass_fronts_y = 6
 var _grass_fronts := [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)]
 
-var _difficulty
+var difficulty
 
 signal health_changed(new_health)
 signal score_changed(new_score)
@@ -52,6 +52,9 @@ var slimes_killed:int
 var dragons_killed:int
 var ghosts_outlived:int
 var duration_secs:float
+
+
+var sounds
 
 
 var player_pos: Vector2:
@@ -95,7 +98,7 @@ func on_game_start(
 	_map = p_map
 	_player = p_player
 	
-	_difficulty = Globals.get_setting(Globals.SETTING_DIFFICULTY)
+	difficulty = Globals.get_setting(Globals.SETTING_DIFFICULTY)
 	
 	_change_health(3)
 	_change_score(0)
@@ -286,10 +289,16 @@ func add_spawn_group() -> void:
 		monster_type = _debug_single_monster
 		_spawn_active = false
 	
+	
+	var first := true
 	for coord in coords:
 		add_spawn(_runner, monster_type, coord)
 		
-		if _debug_single_monster:
+		if first:
+			first = false
+			State.sounds.play(Enums.Sounds.Spawn, Tools.to_pos(coord))
+		
+		if _debug_single_monster >= 0:
 			break
 
 
@@ -326,6 +335,8 @@ func add_bullet(pos: Vector2, dir: Vector2):
 	bullet.position = pos
 	Globals.entity_container.add_child(bullet)
 	bullet.setup(dir)
+	
+	sounds.play(Enums.Sounds.Block, pos)
 
 
 func increase_health() -> int:
@@ -370,12 +381,12 @@ func increase_difficulty() -> void:
 	var current = Globals.get_setting(Globals.SETTING_DIFFICULTY)
 	match current:
 		Enums.Difficulty.Easy:
-			_difficulty = Enums.Difficulty.Normal
-			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			difficulty = Enums.Difficulty.Normal
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, difficulty)
 			Globals.save_settings()
 		Enums.Difficulty.Normal:
-			_difficulty = Enums.Difficulty.Hard
-			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			difficulty = Enums.Difficulty.Hard
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, difficulty)
 			Globals.save_settings()
 		_:
 			assert(current == Enums.Difficulty.Hard)
@@ -385,12 +396,12 @@ func decrease_difficulty() -> void:
 	var current = Globals.get_setting(Globals.SETTING_DIFFICULTY)
 	match current:
 		Enums.Difficulty.Hard:
-			_difficulty = Enums.Difficulty.Normal
-			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			difficulty = Enums.Difficulty.Normal
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, difficulty)
 			Globals.save_settings()
 		Enums.Difficulty.Normal:
-			_difficulty = Enums.Difficulty.Easy
-			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			difficulty = Enums.Difficulty.Easy
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, difficulty)
 			Globals.save_settings()
 		_:
 			assert(current == Enums.Difficulty.Easy)

@@ -100,7 +100,15 @@ func _process(delta):
 		if game_mode == Enums.GameMode.GAME:
 			if _spawn_cooldown.done:
 				State.add_spawn_group()
-				_spawn_cooldown.restart()
+				
+				var spawn_interval = 10
+				if State.difficulty == Enums.Difficulty.Easy:
+					spawn_interval = 15
+				elif State.difficulty == Enums.Difficulty.Normal:
+					spawn_interval = 10
+				elif State.difficulty == Enums.Difficulty.Hard:
+					spawn_interval = 5
+				_spawn_cooldown.restart_with(spawn_interval)
 
 
 # Can yield
@@ -510,13 +518,23 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 
 	_create_new_block()
 	
-	_spawn_cooldown.setup(self, 5, false)
+	var spawn_interval = 10
+	if State.difficulty == Enums.Difficulty.Easy:
+		spawn_interval = 15
+	elif State.difficulty == Enums.Difficulty.Normal:
+		spawn_interval = 10
+	elif State.difficulty == Enums.Difficulty.Hard:
+		spawn_interval = 5
+	
+	_spawn_cooldown.setup(self, spawn_interval, false)
 	_block_cooldown.setup(self, 1.0, false)
 
 
 func _explode_block():
 	var block = _block
 	_block = null
+	
+	State.sounds.play(Enums.Sounds.Block, block.position)
 	
 	block.explode()
 	_runner.create_timer(self, 2.0)

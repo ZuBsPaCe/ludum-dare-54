@@ -10,10 +10,27 @@ var _dead := false
 
 var _headingLeft := true
 
+@onready var _sounds := $Sounds
+
+@export var block_sound: AudioStream
+@export var bullet_sound: AudioStream
+@export var bullet_hit_sound: AudioStream
+@export var hurt_sound: AudioStream
+@export var spawn_sound: AudioStream
+
+
 func _ready():
 	_hit_cooldown.setup(self, 1, true)
 	
 	_glow.modulate = Color(1, 1, 1, 0.2)
+	
+	_sounds.register(Enums.Sounds.Block, block_sound, 76)
+	_sounds.register(Enums.Sounds.Bullet, bullet_sound, 70)
+	_sounds.register(Enums.Sounds.BulletHit, bullet_hit_sound, 70)
+	_sounds.register(Enums.Sounds.Hurt, hurt_sound, 65)
+	_sounds.register(Enums.Sounds.Spawn, spawn_sound, 60)
+	
+	State.sounds = _sounds
 
 
 func _physics_process(delta):	
@@ -61,6 +78,8 @@ func _physics_process(delta):
 			for body in _hit_area.get_overlapping_bodies():
 				if body.is_in_group(Globals.GROUP_BULLET):
 					body.queue_free()
+			
+			State.sounds.play(Enums.Sounds.Hurt, position)
 			
 			if State.decrease_health() > 0:
 				_hit_cooldown.restart()

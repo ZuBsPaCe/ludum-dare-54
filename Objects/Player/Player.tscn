@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://51g21iwaqggp"]
+[gd_scene load_steps=25 format=3 uid="uid://51g21iwaqggp"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_86h85"]
+[ext_resource type="AudioStream" uid="uid://cy2ixytv80uug" path="res://Sounds/Block.wav" id="2_qf60n"]
 [ext_resource type="Texture2D" uid="uid://be6q1olce5bax" path="res://Objects/Player/export/Player/LeftLeg.png" id="3_d3do8"]
 [ext_resource type="Texture2D" uid="uid://bgsacimwd5cll" path="res://Objects/Player/export/Player/RightLeg.png" id="4_bfail"]
 [ext_resource type="Texture2D" uid="uid://kqw1xicfuyvc" path="res://Objects/Player/export/Player/Glow.png" id="5_deg2l"]
@@ -11,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://b87cnpk4efrdj" path="res://Objects/Player/export/Player/Face.png" id="10_gkxa2"]
 [ext_resource type="Texture2D" uid="uid://b5o4g7eoqvsyu" path="res://Sprites/Light/PointLight_1024.png" id="11_8u8p0"]
 [ext_resource type="Texture2D" uid="uid://myl4joa4ipy1" path="res://Objects/Player/export/Player/Hair.png" id="11_fb5su"]
+[ext_resource type="Script" path="res://Scripts/Tools/Sound.gd" id="12_27rdp"]
+[ext_resource type="AudioStream" uid="uid://cx3ajph387dys" path="res://Sounds/Bullet.wav" id="14_4lpy4"]
+[ext_resource type="AudioStream" uid="uid://b76qn5p332bqv" path="res://Sounds/BulletHit.wav" id="15_df0nq"]
+[ext_resource type="AudioStream" uid="uid://bvo0ambec3mo2" path="res://Sounds/Hurt.wav" id="16_4rrgh"]
+[ext_resource type="AudioStream" uid="uid://koygtrpyg2ej" path="res://Sounds/Spawn.wav" id="17_jhb2c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r17rq"]
 radius = 7.0
@@ -1431,6 +1437,11 @@ _data = {
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_86h85")
+block_sound = ExtResource("2_qf60n")
+bullet_sound = ExtResource("14_4lpy4")
+bullet_hit_sound = ExtResource("15_df0nq")
+hurt_sound = ExtResource("16_4rrgh")
+spawn_sound = ExtResource("17_jhb2c")
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -1533,3 +1544,9 @@ shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("11_8u8p0")
 texture_scale = 4.0
+
+[node name="Sounds" type="Node2D" parent="."]
+script = ExtResource("12_27rdp")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
