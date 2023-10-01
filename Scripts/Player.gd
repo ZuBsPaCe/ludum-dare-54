@@ -11,7 +11,7 @@ var _dead := false
 var _headingLeft := true
 
 func _ready():
-	_hit_cooldown.setup(self, 2, true)
+	_hit_cooldown.setup(self, 1, true)
 	
 	_glow.modulate = Color(1, 1, 1, 0.2)
 

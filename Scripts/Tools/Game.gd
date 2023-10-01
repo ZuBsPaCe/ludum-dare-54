@@ -6,6 +6,7 @@ const GameState := preload("res://Scripts/Tools/Examples/ExampleGameState.gd").G
 @export var player_scene: PackedScene
 @export var slime_scene: PackedScene
 @export var dragon_scene: PackedScene
+@export var ghost_scene: PackedScene
 @export var bullet_scene: PackedScene
 @export var spawn_scene: PackedScene
 @export var flag_scene: PackedScene
@@ -43,6 +44,7 @@ func _ready():
 		player_scene,
 		slime_scene,
 		dragon_scene,
+		ghost_scene,
 		bullet_scene,
 		spawn_scene)
 	

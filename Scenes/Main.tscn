@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bjtkbwi2b87ws"]
+[gd_scene load_steps=30 format=3 uid="uid://bjtkbwi2b87ws"]
 
 [ext_resource type="Script" path="res://Scripts/Tools/Main.gd" id="1_jlg1y"]
 [ext_resource type="Script" path="res://Scripts/Tools/CameraShake.gd" id="2"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b50827npty5vl" path="res://Objects/Tilemap/Block3.tscn" id="8_5jqpj"]
 [ext_resource type="PackedScene" uid="uid://dcgfwtubdb1ph" path="res://Objects/Monster/Dragon/MonsterDragon.tscn" id="8_17p7e"]
 [ext_resource type="PackedScene" uid="uid://d2pylccdpav6s" path="res://Objects/Bullet/Bullet.tscn" id="9_8vtr3"]
+[ext_resource type="PackedScene" uid="uid://453po80bwdqj" path="res://Objects/Monster/Ghost/MonsterGhost.tscn" id="9_icy7i"]
 [ext_resource type="PackedScene" uid="uid://82li2qq3slxi" path="res://Objects/Flag/Flag.tscn" id="9_ir1j8"]
 [ext_resource type="PackedScene" uid="uid://r30r20pijuq4" path="res://Objects/Tilemap/Block4.tscn" id="9_th4os"]
 [ext_resource type="PackedScene" uid="uid://bnqkryx7vvxnj" path="res://Objects/Tilemap/Block5.tscn" id="10_y2qfy"]
@@ -59,6 +60,7 @@ script = ExtResource("3_kenll")
 player_scene = ExtResource("4_0phv3")
 slime_scene = ExtResource("7_30qlw")
 dragon_scene = ExtResource("8_17p7e")
+ghost_scene = ExtResource("9_icy7i")
 bullet_scene = ExtResource("9_8vtr3")
 spawn_scene = ExtResource("6_me2ip")
 flag_scene = ExtResource("9_ir1j8")

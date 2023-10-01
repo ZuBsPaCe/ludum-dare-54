@@ -3,6 +3,7 @@ extends Node
 var _player_scene: PackedScene
 var _slime_scene: PackedScene
 var _dragon_scene: PackedScene
+var _ghost_scene: PackedScene
 var _spawn_scene: PackedScene
 var _bullet_scene: PackedScene
 
@@ -33,6 +34,10 @@ var _difficulty
 signal health_changed(new_health)
 
 
+var _debug_single_monster := -1
+var _spawn_active := true
+
+
 var player_pos: Vector2:
 	get:
 		return _player.position
@@ -48,6 +53,7 @@ func setup(
 		player_scene: PackedScene,
 		slime_scene: PackedScene,
 		dragon_scene: PackedScene,
+		ghost_scene: PackedScene,
 		bullet_scene: PackedScene,
 		spawn_scene: PackedScene):
 	_wall_tilemap = wall_tilemap
@@ -55,6 +61,7 @@ func setup(
 	_player_scene = player_scene
 	_slime_scene = slime_scene
 	_dragon_scene = dragon_scene
+	_ghost_scene = ghost_scene
 	_bullet_scene = bullet_scene
 	_spawn_scene = spawn_scene
 
@@ -235,19 +242,31 @@ func _init_spawn_groups():
 #		_spawn_groups.append(coords)
 #	_spawn_group_funcs.append(lambda)
 
+
+
 func add_spawn_group() -> void:
 	var coords: Array[Vector2i] = Tools.rand_item(_spawn_group_funcs).call()
 	
+	if !_spawn_active:
+		return
 	
 	var monster_types := [
 		Enums.MonsterType.Slime,
-		Enums.MonsterType.Dragon
+		Enums.MonsterType.Dragon,
+		Enums.MonsterType.Ghost
 	]
 	
 	var monster_type = Tools.rand_item(monster_types)
 	
+	if _debug_single_monster >= 0:
+		monster_type = _debug_single_monster
+		_spawn_active = false
+	
 	for coord in coords:
 		add_spawn(_runner, monster_type, coord)
+		
+		if _debug_single_monster:
+			break
 
 
 func add_spawn(runner: Runner, monster_type, coord: Vector2i):
@@ -268,6 +287,8 @@ func add_monster(coord: Vector2i, monster_type):
 			monster = _slime_scene.instantiate()
 		Enums.MonsterType.Dragon:
 			monster = _dragon_scene.instantiate()
+		Enums.MonsterType.Ghost:
+			monster = _ghost_scene.instantiate()
 		_:
 			printerr("Unknown Monstertype")
 			return
