@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djyc4otxu2m6p"
-path="res://.godot/imported/Monster1.png-bc4ce39f5d2c35bd4570a75b9a62ce22.ctex"
+uid="uid://c6n1uubs8btsk"
+path="res://.godot/imported/LowerScale.png-cc6a810f07324bf10b396037cdd74519.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Objects/Monster/Monster1.png"
-dest_files=["res://.godot/imported/Monster1.png-bc4ce39f5d2c35bd4570a75b9a62ce22.ctex"]
+source_file="res://Objects/Monster/Slime/export/LowerScale.png"
+dest_files=["res://.godot/imported/LowerScale.png-cc6a810f07324bf10b396037cdd74519.ctex"]
 
 [params]
 

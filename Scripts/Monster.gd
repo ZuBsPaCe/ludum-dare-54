@@ -4,6 +4,11 @@ extends CharacterBody2D
 @export var speed := 100.0
 @export var flying := false
 
+@onready var animation_player := $AnimationPlayer
+
+
+var _headingLeft := false
+
 
 func _physics_process(delta):
 	var player_vec := State.player_pos - position
@@ -11,6 +16,18 @@ func _physics_process(delta):
 	
 	velocity = move_vec
 	move_and_slide()
+	
+	if velocity.x > 0:
+		_headingLeft = false
+		$AnimationPlayer.play("RunRight")
+	elif velocity.x < 0:
+		_headingLeft = true
+		$AnimationPlayer.play("RunLeft")
+	elif velocity.y != 0:
+		if _headingLeft:
+			$AnimationPlayer.play("RunLeft")
+		else:
+			$AnimationPlayer.play("RunRight")
 
 	
 	if !flying:

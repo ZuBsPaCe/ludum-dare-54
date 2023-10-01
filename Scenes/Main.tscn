@@ -9,11 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://51g21iwaqggp" path="res://Objects/Player/Player.tscn" id="4_0phv3"]
 [ext_resource type="PackedScene" uid="uid://c0jc2f3p3a1ks" path="res://Objects/Clouds/Cloud.tscn" id="4_4ri8c"]
 [ext_resource type="PackedScene" uid="uid://bcaue8so15dgx" path="res://Scenes/GameOverlay.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://c3nl7qrkm777s" path="res://Objects/Monster/Monster.tscn" id="5_3tnpe"]
 [ext_resource type="PackedScene" uid="uid://b0tr484jifhat" path="res://Objects/Tilemap/Block1.tscn" id="6_m2m16"]
 [ext_resource type="Script" path="res://Scripts/Tools/Process.gd" id="6_m6gji"]
 [ext_resource type="PackedScene" uid="uid://ta3rx0s4lpew" path="res://Objects/Spawn/Spawn.tscn" id="6_me2ip"]
 [ext_resource type="PackedScene" uid="uid://d3clocpmejs8o" path="res://Objects/Tilemap/Block2.tscn" id="7_7wolc"]
+[ext_resource type="PackedScene" uid="uid://c3nl7qrkm777s" path="res://Objects/Monster/MonsterSlime.tscn" id="7_30qlw"]
 [ext_resource type="PackedScene" uid="uid://b50827npty5vl" path="res://Objects/Tilemap/Block3.tscn" id="8_5jqpj"]
 [ext_resource type="PackedScene" uid="uid://r30r20pijuq4" path="res://Objects/Tilemap/Block4.tscn" id="9_th4os"]
 [ext_resource type="PackedScene" uid="uid://bnqkryx7vvxnj" path="res://Objects/Tilemap/Block5.tscn" id="10_y2qfy"]
@@ -557,7 +557,7 @@ process_mode = 1
 editor_description = "Nodes in Game will not run while the game is paused. This affects _process(), _input() and _unhandled_input(). Add game logic, ingame ui, levels and ingame sound here."
 script = ExtResource("3_kenll")
 player_scene = ExtResource("4_0phv3")
-monster_scene = ExtResource("5_3tnpe")
+monster_scene = ExtResource("7_30qlw")
 spawn_scene = ExtResource("6_me2ip")
 block_scenes = Array[PackedScene]([ExtResource("6_m2m16"), ExtResource("7_7wolc"), ExtResource("8_5jqpj"), ExtResource("9_th4os"), ExtResource("10_y2qfy"), ExtResource("11_clxab"), ExtResource("12_bfsv6")])
 
