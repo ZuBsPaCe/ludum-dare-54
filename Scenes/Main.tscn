@@ -62,7 +62,8 @@ format = 2
 layer_0/tile_data = PackedInt32Array(524298, 196608, 5, 589834, 65536, 5, 655370, 196608, 5, 524306, 131072, 5, 589842, 131072, 5, 655378, 0, 5, 524307, 196608, 5, 589843, 196608, 5, 655379, 131072, 5, 524299, 196608, 5, 589835, 196608, 5, 655371, 0, 5, 524300, 65536, 5, 589836, 196608, 5, 655372, 131072, 5, 524305, 131072, 5, 589841, 65536, 5, 655377, 196608, 5)
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="."]
-color = Color(0.835294, 0.835294, 0.835294, 1)
+visible = false
+color = Color(0.987248, 0.99156, 0.998998, 1)
 
 [node name="Game" type="CanvasLayer" parent="."]
 process_mode = 1
@@ -100,6 +101,7 @@ script = ExtResource("2")
 environment = SubResource("1")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Game"]
+visible = false
 color = Color(0.835294, 0.835294, 0.835294, 1)
 
 [node name="Process" type="Node" parent="."]
