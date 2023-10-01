@@ -39,6 +39,9 @@ var block_invalid_color: Color
 var heart_color: Color
 
 
+var camera:Camera2D
+
+
 func _ready():
 	_center_node = Node2D.new()
 	add_child(_center_node)

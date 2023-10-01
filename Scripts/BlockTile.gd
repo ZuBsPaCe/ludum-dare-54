@@ -9,11 +9,18 @@ extends Sprite2D
 func _ready():
 	arrow_up.visible = false
 	arrow_down.visible = false
+#
+#	$CPUParticles2D.emitting = false
+#	$CPUParticles2D.one_shot = false
+#	$CPUParticles2D.explosiveness = 0.8
 
 
 func setup(up: bool):
 	arrow_up.visible = up
 	arrow_down.visible = !up
+
+func explode():
+	$CPUParticles2D.emitting = true
 
 
 func fix_arrow_rotation():

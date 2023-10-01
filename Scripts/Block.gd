@@ -136,6 +136,11 @@ func update_mouse_pos(mouse_pos: Vector2):
 		modulate = Globals.block_invalid_color
 
 
+func explode():
+	for block_tile in _block_tiles:
+		block_tile.explode()
+		
+
 func apply():
 	assert(valid)
 	
@@ -162,6 +167,8 @@ func apply():
 			_:
 				printerr("Unexpected tiletype")
 				return
+	
+	Globals.camera.start_shake(Vector2.UP.rotated(randf() * TAU), 1.0, 30.0, 0.15)
 	
 	for offset in _rotated_offsets:
 		State.set_tile(_mouse_coord + offset, new_tile_type)

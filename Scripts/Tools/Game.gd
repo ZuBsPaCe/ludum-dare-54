@@ -55,6 +55,8 @@ func _ready():
 		spawn_scene)
 	
 	Globals.switch_game_state_requested.connect(_on_switch_game_state_requested)
+	
+	Globals.camera = $Camera2D 
 
 
 func _on_switch_game_state_requested(new_state):
@@ -89,6 +91,7 @@ func _process(delta):
 					_block_cooldown.restart_with(0.1)
 					
 					_block.apply()
+					_explode_block()
 					_create_new_block()
 			else:
 				_block.visible = false
@@ -510,6 +513,17 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 	_spawn_cooldown.setup(self, 5, false)
 	_block_cooldown.setup(self, 1.0, false)
 
+
+func _explode_block():
+	var block = _block
+	_block = null
+	
+	block.explode()
+	_runner.create_timer(self, 2.0)
+	if !await _runner.proceed:
+		return
+	
+	block.queue_free()
 
 
 func _create_new_block():

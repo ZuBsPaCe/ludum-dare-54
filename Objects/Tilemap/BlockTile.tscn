@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://vjrt0uf4cuk8"]
+[gd_scene load_steps=6 format=3 uid="uid://vjrt0uf4cuk8"]
 
 [ext_resource type="Texture2D" uid="uid://csucj602p3eyf" path="res://Objects/Tilemap/Tile.png" id="1_qqc10"]
 [ext_resource type="Script" path="res://Scripts/BlockTile.gd" id="2_u6awn"]
 [ext_resource type="Texture2D" uid="uid://ivfldmmhdmkl" path="res://Objects/Tilemap/ArrowUp.png" id="3_sm42j"]
 [ext_resource type="Texture2D" uid="uid://pxgc0f8fb5dd" path="res://Objects/Tilemap/ArrowDown.png" id="4_52xva"]
+[ext_resource type="Texture2D" uid="uid://dswbxgvdyv7sb" path="res://Objects/Bullet/export/Fill.png" id="5_5ey4q"]
 
 [node name="BlockTile" type="Sprite2D" groups=["BlockTile"]]
 texture = ExtResource("1_qqc10")
@@ -16,3 +17,20 @@ texture = ExtResource("3_sm42j")
 [node name="ArrowDown" type="Sprite2D" parent="."]
 position = Vector2(0, 16)
 texture = ExtResource("4_52xva")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+emitting = false
+amount = 20
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.8
+texture = ExtResource("5_5ey4q")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+damping_min = 350.0
+damping_max = 600.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
