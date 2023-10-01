@@ -9,6 +9,7 @@ extends Node
 @onready var _game := $Game
 
 @onready var _runner := Runner.new()
+@onready var _ground_tilemap := $GroundTilemap
 
 var _tutorial_level := 0
 
@@ -28,6 +29,7 @@ func _ready():
 	_process.set_transition_overlay(Color.TRANSPARENT, 1.0)
 	
 	_game.visible = false
+	_ground_tilemap.visible = false
 
 
 func switch_game_state(new_state):
@@ -47,6 +49,7 @@ func _on_GameStateMachine_enter_state():
 			
 			get_tree().paused = false
 			_game.visible = true
+			_ground_tilemap.visible = true
 			
 			await _game.start(_runner, Enums.GameMode.GAME)
 			Globals.switch_game_state(Enums.GameState.GAME)
@@ -55,6 +58,7 @@ func _on_GameStateMachine_enter_state():
 		Enums.GameState.GAME:
 			get_tree().paused = false
 			_game.visible = true
+			_ground_tilemap.visible = true
 			_process.show_game_overlay(0.5)
 			
 		
@@ -75,6 +79,7 @@ func _on_GameStateMachine_enter_state():
 			
 			get_tree().paused = false
 			_game.visible = true
+			_ground_tilemap.visible = true
 			
 			await _game.start(_runner, Enums.GameMode.TUTORIAL, _tutorial_level)
 			_process.show_game_overlay(0.5)
@@ -88,6 +93,7 @@ func _on_GameStateMachine_enter_state():
 		
 		Enums.GameState.PAUSE:
 			_game.visible = false
+			_ground_tilemap.visible = false
 			get_tree().paused = true
 			
 			_process.show_main_menu(0.5, Enums.MainMenuMode.Pause)
@@ -107,6 +113,7 @@ func _on_GameStateMachine_exit_state():
 			
 		Enums.GameState.GAME:
 			_game.visible = false
+			_ground_tilemap.visible = false
 			_process.hide_game_overlay(0.5)
 		
 		Enums.GameState.TUTORIAL:
@@ -127,6 +134,7 @@ func _on_GameStateMachine_exit_state():
 		
 		Enums.GameState.PAUSE:
 			_game.visible = false
+			_ground_tilemap.visible = false
 			_process.hide_main_menu(0.5)
 
 		_:
