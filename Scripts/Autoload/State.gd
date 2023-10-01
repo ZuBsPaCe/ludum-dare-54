@@ -23,6 +23,7 @@ var _grass_tops := [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 
 var _grass_fronts_y = 6
 var _grass_fronts := [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)]
 
+var _difficulty
 
 signal health_changed(new_health)
 
@@ -52,6 +53,8 @@ func on_game_start(
 	_runner = runner
 	_map = p_map
 	_player = p_player
+	
+	_difficulty = Globals.get_setting(Globals.SETTING_DIFFICULTY)
 	
 	_change_health(3)
 	
@@ -253,3 +256,46 @@ func _change_health(new_health):
 		new_health = 0
 	_health = new_health
 	emit_signal("health_changed", _health)
+
+
+func increase_difficulty() -> void:
+	var current = Globals.get_setting(Globals.SETTING_DIFFICULTY)
+	match current:
+		Enums.Difficulty.Easy:
+			_difficulty = Enums.Difficulty.Normal
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			Globals.save_settings()
+		Enums.Difficulty.Normal:
+			_difficulty = Enums.Difficulty.Hard
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			Globals.save_settings()
+		_:
+			assert(current == Enums.Difficulty.Hard)
+
+
+func decrease_difficulty() -> void:
+	var current = Globals.get_setting(Globals.SETTING_DIFFICULTY)
+	match current:
+		Enums.Difficulty.Hard:
+			_difficulty = Enums.Difficulty.Normal
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			Globals.save_settings()
+		Enums.Difficulty.Normal:
+			_difficulty = Enums.Difficulty.Easy
+			Globals.set_setting(Globals.SETTING_DIFFICULTY, _difficulty)
+			Globals.save_settings()
+		_:
+			assert(current == Enums.Difficulty.Easy)
+
+
+func get_difficulty_name(difficulty) -> String:
+	match difficulty:
+		Enums.Difficulty.Easy:
+			return "Easy"
+		Enums.Difficulty.Normal:
+			return "Balanced"
+		Enums.Difficulty.Hard:
+			return "Nightmare"
+		_:
+			printerr("Unknown Difficulty")
+			return "Unknown"

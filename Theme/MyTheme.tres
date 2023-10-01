@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://bufd87u2vo210"]
 
-[ext_resource type="FontFile" uid="uid://cdxndj181tilr" path="res://Theme/Fonts/Zubspace-Regular.ttf" id="1_8y57p"]
+[ext_resource type="FontFile" uid="uid://mqkgy0ruh1va" path="res://Theme/Fonts/LiberationSerif-Regular.ttf" id="1_4ker5"]
 
 [resource]
-default_font = ExtResource("1_8y57p")
-default_font_size = 96
+default_font = ExtResource("1_4ker5")
+default_font_size = 64
 Button/colors/font_color_hover = Color(10, 0.51, 0, 1)
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10

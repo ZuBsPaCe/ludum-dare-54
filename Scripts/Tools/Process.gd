@@ -27,8 +27,7 @@ func _ready():
 	set_fullscreen(Globals.get_setting(Globals.SETTING_FULLSCREEN))
 	
 	_main_menu.setup(
-		Globals.get_setting(Globals.SETTING_MUSIC_VOLUME),
-		Globals.get_setting(Globals.SETTING_SOUND_VOLUME))
+		Enums.MainMenuMode.Standard)
 	
 	_main_menu.visible = false
 	_game_overlay.visible = false

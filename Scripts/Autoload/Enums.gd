@@ -3,11 +3,16 @@ extends Node
 enum GameState {
 	NONE,
 	MAIN_MENU,
-#	RESTART,
-#	NEXT_LEVEL,
+	
 	GAME,
+	TUTORIAL,
+	
 	PAUSE,
-	DEAD
+	CONTINUE,
+	
+	DEAD,
+	
+	EXIT
 }
 
 enum LevelState {
@@ -21,4 +26,17 @@ enum TileType {
 	Wall,
 	Empty,
 	ForcedEmpty
+}
+
+
+enum MainMenuMode {
+	Standard,
+	Pause
+}
+
+
+enum Difficulty {
+	Easy,
+	Normal,
+	Hard
 }

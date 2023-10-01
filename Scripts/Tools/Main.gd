@@ -48,6 +48,9 @@ func _on_GameStateMachine_enter_state():
 			
 		Enums.GameState.DEAD:
 			_process.show_death_overlay(0.5)
+		
+		Enums.GameState.EXIT:
+			get_tree().quit()
 
 		_:
 			assert(false, "Unknown game state")

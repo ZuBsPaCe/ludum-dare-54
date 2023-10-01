@@ -8,6 +8,7 @@ const SETTING_WINDOW_WIDTH := "Window Width"
 const SETTING_WINDOW_HEIGHT := "Window Height"
 const SETTING_MUSIC_VOLUME := "Music"
 const SETTING_SOUND_VOLUME := "Sound"
+const SETTING_DIFFICULTY := "Difficulty"
 
 const GROUP_PLAYER := "Player"
 const GROUP_MONSTER := "Monster"
@@ -58,10 +59,14 @@ func setup(
 		Globals.SETTING_WINDOW_WIDTH: screen_size.x / 2,
 		Globals.SETTING_WINDOW_HEIGHT: screen_size.y / 2,
 		Globals.SETTING_MUSIC_VOLUME: 0.8,
-		Globals.SETTING_SOUND_VOLUME: 0.8
+		Globals.SETTING_SOUND_VOLUME: 0.8,
+		Globals.SETTING_DIFFICULTY: Enums.Difficulty.Normal
 	}
 	
 	Tools.load_data("settings.json", _settings)
+	
+	# Loaded as a float. Must cast to int, otherwise match statements don't work
+	_settings[Globals.SETTING_DIFFICULTY] = int(_settings[Globals.SETTING_DIFFICULTY])
 
 
 func get_setting(setting: String):
