@@ -41,4 +41,4 @@ func _on_main_menu_button_mouse_exited():
 func _on_main_menu_button_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo():
 		State.block_disabled = false
-		Globals.switch_game_state(Enums.GameState.MAIN_MENU)
+		Globals.switch_game_state(Enums.GameState.PAUSE)

@@ -8,6 +8,8 @@
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_t2qxo")
+_unfocused_color = null
+_focused_color = null
 
 [node name="Tilemaps" type="Node2D" parent="."]
 unique_name_in_owner = true

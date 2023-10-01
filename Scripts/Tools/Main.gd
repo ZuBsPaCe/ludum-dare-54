@@ -26,6 +26,8 @@ func _ready():
 		
 	_process.set_transition_overlay(Color.BLACK, 0.0)
 	_process.set_transition_overlay(Color.TRANSPARENT, 1.0)
+	
+	_game.visible = false
 
 
 func switch_game_state(new_state):
@@ -39,14 +41,22 @@ func _on_GameStateMachine_enter_state():
 			
 			_process.show_main_menu(0.5, Enums.MainMenuMode.Standard)
 
-		Enums.GameState.GAME:
+		Enums.GameState.NEW_GAME:
 			_runner.abort()
 			_runner = Runner.new()
 			
 			get_tree().paused = false
+			_game.visible = true
 			
 			await _game.start(_runner, Enums.GameMode.GAME)
+			Globals.switch_game_state(Enums.GameState.GAME)
+			
+		
+		Enums.GameState.GAME:
+			get_tree().paused = false
+			_game.visible = true
 			_process.show_game_overlay(0.5)
+			
 		
 		Enums.GameState.START_TUTORIAL:
 			_tutorial_level = 0
@@ -64,6 +74,7 @@ func _on_GameStateMachine_enter_state():
 			_runner = Runner.new()
 			
 			get_tree().paused = false
+			_game.visible = true
 			
 			await _game.start(_runner, Enums.GameMode.TUTORIAL, _tutorial_level)
 			_process.show_game_overlay(0.5)
@@ -74,6 +85,13 @@ func _on_GameStateMachine_enter_state():
 		
 		Enums.GameState.EXIT:
 			get_tree().quit()
+		
+		Enums.GameState.PAUSE:
+			_game.visible = false
+			get_tree().paused = true
+			
+			_process.show_main_menu(0.5, Enums.MainMenuMode.Pause)
+
 
 		_:
 			assert(false, "Unknown game state")
@@ -84,7 +102,11 @@ func _on_GameStateMachine_exit_state():
 		Enums.GameState.MAIN_MENU:
 			_process.hide_main_menu(0.5)
 
+		Enums.GameState.NEW_GAME:
+			pass
+			
 		Enums.GameState.GAME:
+			_game.visible = false
 			_process.hide_game_overlay(0.5)
 		
 		Enums.GameState.TUTORIAL:
@@ -102,6 +124,10 @@ func _on_GameStateMachine_exit_state():
 		
 		Enums.GameState.EXIT:
 			pass
+		
+		Enums.GameState.PAUSE:
+			_game.visible = false
+			_process.hide_main_menu(0.5)
 
 		_:
 			assert(false, "Unknown game state")

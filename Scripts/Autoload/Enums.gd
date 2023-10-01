@@ -4,6 +4,7 @@ enum GameState {
 	NONE,
 	MAIN_MENU,
 	
+	NEW_GAME,
 	GAME,
 	
 	START_TUTORIAL,
@@ -11,7 +12,6 @@ enum GameState {
 	NEXT_TUTORIAL,
 	
 	PAUSE,
-	CONTINUE,
 	
 	DEAD,
 	

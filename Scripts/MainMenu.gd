@@ -151,10 +151,10 @@ func _on_button_1_gui_input(event):
 		
 	match _mode:		
 		Enums.MainMenuMode.Standard:
-			Globals.switch_game_state(Enums.GameState.GAME)
+			Globals.switch_game_state(Enums.GameState.NEW_GAME)
 		
 		Enums.MainMenuMode.Pause:
-			Globals.switch_game_state(Enums.GameState.CONTINUE)
+			Globals.switch_game_state(Enums.GameState.GAME)
 		
 		_:
 			printerr("Unknown MainMenuMode")
@@ -170,7 +170,7 @@ func _on_button_2_gui_input(event):
 			Globals.switch_game_state(Enums.GameState.START_TUTORIAL)
 		
 		Enums.MainMenuMode.Pause:
-			Globals.switch_game_state(Enums.GameState.GAME)
+			Globals.switch_game_state(Enums.GameState.NEW_GAME)
 		
 		_:
 			printerr("Unknown MainMenuMode")

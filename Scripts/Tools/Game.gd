@@ -52,8 +52,7 @@ func _ready():
 
 
 func _on_switch_game_state_requested(new_state):
-	if new_state != Enums.GameState.GAME:
-		game_running = false
+	game_running = new_state == Enums.GameState.GAME
 
 
 func _process(delta):
@@ -501,8 +500,6 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 	
 	_spawn_cooldown.setup(self, 5, false)
 	_block_cooldown.setup(self, 1.0, false)
-	
-	game_running = true
 
 
 
