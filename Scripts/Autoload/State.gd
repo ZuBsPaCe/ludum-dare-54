@@ -15,6 +15,8 @@ var _spawn_group_funcs := []
 
 var _health := 3
 
+var _empty_cell := Vector2i(0, 4)
+
 var _grass_tops_y = 5
 var _grass_tops := [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5)]
 
@@ -104,13 +106,13 @@ func _set_cell(coord: Vector2i, tile_type) -> void:
 			
 		Enums.TileType.Empty, Enums.TileType.ForcedEmpty:
 			_wall_tilemap.set_cells_terrain_connect(0, [coord], 0, -1, false)
-			_ground_tilemap.set_cell(0, coord)
+			_ground_tilemap.set_cell(0, coord, 0, _empty_cell)
 			
 			if _ground_tilemap.get_cell_atlas_coords(0, coord + Vector2i.UP).y == _grass_tops_y:
 				_ground_tilemap.set_cell(0, coord, 0, Tools.rand_item(_grass_fronts))
 			
 			if _ground_tilemap.get_cell_atlas_coords(0, coord + Vector2i.DOWN).y == _grass_fronts_y:
-				_ground_tilemap.set_cell(0, coord + Vector2i.DOWN)
+				_ground_tilemap.set_cell(0, coord + Vector2i.DOWN, 0, _empty_cell)
 		_:
 			printerr("Unknown TileType")
 
