@@ -9,6 +9,8 @@ extends CharacterBody2D
 @onready var sprites := $Sprites
 
 
+var _runner: Runner
+
 var _headingLeft := false
 
 var _dragon_head_cooldown := Cooldown.new()
@@ -16,6 +18,7 @@ var _dragon_fire_cooldown := Cooldown.new()
 var _dragon_shoot_cooldown := Cooldown.new()
 
 var _ghost_velocity := Vector2.ZERO
+var _ghost_alive_cooldown := Cooldown.new()
 
 
 func _ready():
@@ -23,6 +26,11 @@ func _ready():
 		_dragon_head_cooldown.setup(self, randf() * 1.1, false)
 		_dragon_fire_cooldown.setup(self, randf() * 3, false)
 		_dragon_shoot_cooldown.setup(self, 0.5, true)
+	elif monster_type == Enums.MonsterType.Ghost:
+		_ghost_alive_cooldown.setup(self, 30, false)
+
+func setup(runner: Runner):
+	_runner = runner
 
 
 func _physics_process(delta):
@@ -51,6 +59,8 @@ func _physics_process(delta):
 			if State.is_valid_tile(coord):
 				if State.is_tile(coord, Enums.TileType.Empty) or State.is_tile(coord, Enums.TileType.ForcedEmpty):
 					queue_free()
+					
+					State.add_slime_killed()
 
 		
 		Enums.MonsterType.Dragon:
@@ -91,12 +101,20 @@ func _physics_process(delta):
 					_dragon_head_cooldown.restart_with(1.1)
 		
 		Enums.MonsterType.Ghost:
-			var target_velocity := player_vec.normalized() * speed
-			velocity = velocity.move_toward(target_velocity, speed * delta)
-
-			move_and_slide()
+			if !_ghost_alive_cooldown.done:
 			
-			if player_vec.x > 0:
-				sprites.scale = Vector2(-1, 1)
+				var target_velocity := player_vec.normalized() * speed
+				velocity = velocity.move_toward(target_velocity, speed * delta)
+
+				move_and_slide()
+				
+				if player_vec.x > 0:
+					sprites.scale = Vector2(-1, 1)
+				else:
+					sprites.scale = Vector2(1, 1)
 			else:
-				sprites.scale = Vector2(1, 1)
+				State.add_ghost_outlived()
+				set_physics_process(false)
+				
+				var tween := _runner.create_tween(self)
+				tween.tween_property(self, "modulate", Tools.get_alpha_0(modulate), 3.0)

@@ -5,11 +5,16 @@ extends CanvasLayer
 
 @onready var _heart_container := $%HeartContainer
 @onready var _main_menu_button := $%MainMenuButton
+@onready var _score_label := $%ScoreLabel
 
 @onready var _rotate_gear := false
 
+
 func _ready():
 	State.health_changed.connect(_on_health_changed)
+	_score_label.text = ""
+	
+	State.score_changed.connect(_on_score_changed)
 	
 
 func _process(delta):
@@ -42,3 +47,6 @@ func _on_main_menu_button_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo():
 		State.block_disabled = false
 		Globals.switch_game_state(Enums.GameState.PAUSE)
+
+func _on_score_changed(new_value: int):
+	_score_label.text = str(new_value)

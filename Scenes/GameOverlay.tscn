@@ -21,7 +21,18 @@ size_flags_vertical = 0
 
 [node name="HeartContainer" type="HBoxContainer" parent="Root/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="Root/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.7)
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 40
+text = "99999"
+horizontal_alignment = 2
 
 [node name="Control" type="Control" parent="Root/HBoxContainer"]
 layout_mode = 2

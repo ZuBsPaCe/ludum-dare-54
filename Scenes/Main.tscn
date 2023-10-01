@@ -103,7 +103,6 @@ heart_color = Color(0.968627, 0, 0, 1)
 visible = false
 
 [node name="DeathOverlay" parent="Process" instance=ExtResource("18_1gcbc")]
-visible = false
 
 [node name="TransitionOverlay" type="CanvasLayer" parent="Process"]
 visible = false

@@ -74,6 +74,7 @@ func hide_game_overlay(duration: float):
 
 # Can yield
 func show_death_overlay(duration: float):
+	_death_overlay.setup()
 	await _modulate_death_overlay.tween(Color.WHITE, duration)
 
 # Can yield

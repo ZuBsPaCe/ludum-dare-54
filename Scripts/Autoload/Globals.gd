@@ -17,6 +17,11 @@ const GROUP_FLAG := "Flag"
 const GROUP_BULLET := "Bullet"
 
 
+const SLIME_KILLED_SCORE := 200
+const DRAGON_KILLED_SCORE := 500
+const GHOST_OUTLIVED_SCORE := 1000
+const TILE_SCORE := 10
+
 var _center_node: Node2D
 var _settings: Dictionary
 

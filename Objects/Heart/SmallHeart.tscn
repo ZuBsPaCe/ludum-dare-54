@@ -10,7 +10,7 @@ offset_right = 32.0
 offset_bottom = 32.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.968627, 0, 0, 0.607843)
+modulate = Color(0.97, 0, 0, 0.5)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0

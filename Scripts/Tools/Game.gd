@@ -57,7 +57,10 @@ func _on_switch_game_state_requested(new_state):
 
 func _process(delta):
 	if game_running:
+		State.duration_secs += delta
+		
 		if _block != null:
+			
 			if !State.block_disabled:
 				_block.visible = true
 			

@@ -35,20 +35,62 @@ layout_mode = 2
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Root/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="PointsLabel" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Points:"
-horizontal_alignment = 1
+
+[node name="DurationLabel" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Duration:"
+
+[node name="SlimesKilledLabel" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Slimes killed:"
+
+[node name="DragonsKilledLabel" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dragons killed:"
+
+[node name="GhostsOutlivedLabel" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ghost outlived:"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Root/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="PointsValue" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="ScoreValue" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "9999"
-horizontal_alignment = 1
+horizontal_alignment = 2
+
+[node name="DurationValue" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0s"
+horizontal_alignment = 2
+
+[node name="SlimesKilledValue" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0s"
+horizontal_alignment = 2
+
+[node name="DragonsKilledValue" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0s"
+horizontal_alignment = 2
+
+[node name="GhostsOutlivedValue" type="Label" parent="Root/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0s"
+horizontal_alignment = 2
 
 [node name="Control2" type="Control" parent="Root/VBoxContainer"]
 layout_mode = 2
@@ -61,6 +103,10 @@ alignment = 1
 [node name="RestartButton" type="Button" parent="Root/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Restart"
+
+[node name="Control" type="Control" parent="Root/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 
 [node name="MainMenuButton" type="Button" parent="Root/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

@@ -20,6 +20,7 @@ var _map: Map
 var _spawn_group_funcs := []
 
 var _health := 3
+var _score := 0
 
 var _empty_cell := Vector2i(0, 4)
 
@@ -32,6 +33,7 @@ var _grass_fronts := [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3
 var _difficulty
 
 signal health_changed(new_health)
+signal score_changed(new_score)
 
 
 var _debug_single_monster := -1
@@ -39,6 +41,17 @@ var _spawn_active := true
 
 
 var block_disabled := false
+
+
+var score:float:
+	get:
+		return _score
+
+
+var slimes_killed:int
+var dragons_killed:int
+var ghosts_outlived:int
+var duration_secs:float
 
 
 var player_pos: Vector2:
@@ -85,6 +98,12 @@ func on_game_start(
 	_difficulty = Globals.get_setting(Globals.SETTING_DIFFICULTY)
 	
 	_change_health(3)
+	_change_score(0)
+	
+	slimes_killed = 0
+	dragons_killed = 0
+	ghosts_outlived = 0
+	duration_secs = 0.0
 	
 	_init_tilemap()
 	_init_spawn_groups()
@@ -323,6 +342,27 @@ func _change_health(new_health):
 		new_health = 0
 	_health = new_health
 	emit_signal("health_changed", _health)
+
+
+func add_tile_score(tile_count: int) -> void:
+	_change_score(_score + tile_count * Globals.TILE_SCORE)
+
+func add_slime_killed() -> void:
+	slimes_killed += 1
+	_change_score(_score + Globals.SLIME_KILLED_SCORE)
+
+func add_dragon_killed() -> void:
+	dragons_killed += 1
+	_change_score(_score + Globals.DRAGON_KILLED_SCORE)
+
+func add_ghost_outlived() -> void:
+	ghosts_outlived += 1
+	_change_score(_score + Globals.GHOST_OUTLIVED_SCORE)
+
+
+func _change_score(new_score):
+	_score = new_score
+	emit_signal("score_changed", _score)
 
 
 func increase_difficulty() -> void:

@@ -162,12 +162,21 @@ func apply():
 			_:
 				printerr("Unexpected tiletype")
 				return
-				
+	
 	for offset in _rotated_offsets:
 		State.set_tile(_mouse_coord + offset, new_tile_type)
 	
+	State.add_tile_score(_rotated_offsets.size())
+	
 	for body in _area.get_overlapping_bodies():
 		if body.is_in_group(Globals.GROUP_MONSTER):
+			match body.monster_type:
+				Enums.MonsterType.Slime:
+					State.add_slime_killed()
+				Enums.MonsterType.Dragon:
+					State.add_dragon_killed()
+				_:
+					printerr("Unknown MonsterType")
 			body.queue_free()
 	
 	
