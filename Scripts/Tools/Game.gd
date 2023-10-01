@@ -59,26 +59,31 @@ func _on_switch_game_state_requested(new_state):
 func _process(delta):
 	if game_running:
 		if _block != null:
-			var mouse_pos := get_global_mouse_position()
-			var mouse_coord := Tools.to_coord(mouse_pos)
+			if !State.block_disabled:
+				_block.visible = true
 			
-			if _can_toggle_block_up and Input.is_action_just_pressed("toggle_block_up") and _block_cooldown.done:
-				_block_cooldown.restart_with(0.1)
-				_block_up = !_block_up
-				_block.change_up(_block_up)
-			
-			if Input.is_action_just_pressed("turn_left"):
-				_block.turn_left()
-			elif Input.is_action_just_pressed("turn_right"):
-				_block.turn_right()
-			
-			_block.update_mouse_pos(mouse_pos)
-			
-			if _block.valid and Input.is_action_just_pressed("apply_block") and _block_cooldown.done:
-				_block_cooldown.restart_with(0.1)
+				var mouse_pos := get_global_mouse_position()
+				var mouse_coord := Tools.to_coord(mouse_pos)
 				
-				_block.apply()
-				_create_new_block()
+				if _can_toggle_block_up and Input.is_action_just_pressed("toggle_block_up") and _block_cooldown.done:
+					_block_cooldown.restart_with(0.1)
+					_block_up = !_block_up
+					_block.change_up(_block_up)
+				
+				if Input.is_action_just_pressed("turn_left"):
+					_block.turn_left()
+				elif Input.is_action_just_pressed("turn_right"):
+					_block.turn_right()
+				
+				_block.update_mouse_pos(mouse_pos)
+				
+				if _block.valid and Input.is_action_just_pressed("apply_block") and _block_cooldown.done:
+					_block_cooldown.restart_with(0.1)
+					
+					_block.apply()
+					_create_new_block()
+			else:
+				_block.visible = false
 
 			
 		if game_mode == Enums.GameMode.GAME:

@@ -38,6 +38,9 @@ var _debug_single_monster := -1
 var _spawn_active := true
 
 
+var block_disabled := false
+
+
 var player_pos: Vector2:
 	get:
 		return _player.position
@@ -85,6 +88,8 @@ func on_game_start(
 	
 	_init_tilemap()
 	_init_spawn_groups()
+	
+	block_disabled = false
 
 
 func on_game_reset():

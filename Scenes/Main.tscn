@@ -118,9 +118,9 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" parent="Process" instance=ExtResource("3")]
-visible = false
 
 [node name="TutorialOverlay" type="CanvasLayer" parent="Process"]
+visible = false
 script = ExtResource("24_h7aec")
 
 [node name="Root" type="MarginContainer" parent="Process/TutorialOverlay"]
