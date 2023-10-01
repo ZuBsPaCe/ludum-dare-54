@@ -5,7 +5,10 @@ enum GameState {
 	MAIN_MENU,
 	
 	GAME,
+	
+	START_TUTORIAL,
 	TUTORIAL,
+	NEXT_TUTORIAL,
 	
 	PAUSE,
 	CONTINUE,
@@ -19,6 +22,11 @@ enum LevelState {
 	NONE,
 	RUNNING,
 	STOPPED
+}
+
+enum GameMode {
+	GAME,
+	TUTORIAL
 }
 
 enum TileType {

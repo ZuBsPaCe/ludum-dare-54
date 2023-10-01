@@ -22,7 +22,7 @@ tile_offset = Vector2i(-1, -1)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 22
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-96, -96, 32, -96, 32, -32, 96, -32, 96, 32, -32, 32, -32, -32, -96, -32)

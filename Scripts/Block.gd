@@ -2,8 +2,6 @@ class_name Block
 extends Node2D
 
 
-
-
 @export var special_offset := false
 
 var valid: bool
@@ -21,20 +19,21 @@ var _area: Area2D
 func _ready():
 	_area = get_node("Area2D")
 	
-
-func setup(p_up: bool):
-	up = p_up
-	
 	for child in get_children():
 		if child.is_in_group(Globals.GROUP_BLOCK_TILE):
 			_block_tiles.append(child)
 			_tile_offsets.append(child.tile_offset)
-			child.setup(up)
-			
+
+func setup(p_up: bool, p_rotation_counter := -1):
+	change_up(p_up)
+	
 	_rotated_offsets = _tile_offsets.duplicate()
 	
 	if !special_offset:
-		_rotation_counter = randi() % 4
+		if p_rotation_counter >= 0:
+			_rotation_counter = p_rotation_counter
+		else:
+			_rotation_counter = randi() % 4
 		_update_rotation()
 
 func turn_left():
@@ -48,6 +47,12 @@ func turn_right():
 		_rotation_counter += 1
 		_update_rotation()
 
+
+func change_up(p_up: bool):
+	up = p_up
+	
+	for block_tile in _block_tiles:
+		block_tile.setup(up)
 
 func _update_rotation():
 	_rotation_counter = posmod(_rotation_counter, 4)
@@ -122,7 +127,7 @@ func update_mouse_pos(mouse_pos: Vector2):
 	
 	if valid:
 		for body in _area.get_overlapping_bodies():
-			if body.is_in_group(Globals.GROUP_PLAYER):
+			if body.is_in_group(Globals.GROUP_PLAYER) or body.is_in_group(Globals.GROUP_FLAG):
 				valid = false
 	
 	if valid:

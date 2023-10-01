@@ -10,6 +10,8 @@ extends Node
 
 @onready var _runner := Runner.new()
 
+var _tutorial_level := 0
+
 
 func _ready():
 	get_tree().paused = true
@@ -34,18 +36,39 @@ func _on_GameStateMachine_enter_state():
 	match _game_state.current:
 		Enums.GameState.MAIN_MENU:
 			get_tree().paused = true
-			_process.show_main_menu(0.5)
+			
+			_process.show_main_menu(0.5, Enums.MainMenuMode.Standard)
 
 		Enums.GameState.GAME:
 			_runner.abort()
 			_runner = Runner.new()
 			
 			get_tree().paused = false
-			Effects.shake(Vector2.RIGHT)
 			
-			await _game.start(_runner)
+			await _game.start(_runner, Enums.GameMode.GAME)
 			_process.show_game_overlay(0.5)
+		
+		Enums.GameState.START_TUTORIAL:
+			_tutorial_level = 0
+			Globals.switch_game_state(Enums.GameState.TUTORIAL)
+		
+		Enums.GameState.NEXT_TUTORIAL:
+			if _tutorial_level >= 4:
+				Globals.switch_game_state(Enums.GameState.MAIN_MENU)
+			else:
+				_tutorial_level += 1
+				Globals.switch_game_state(Enums.GameState.TUTORIAL)
+		
+		Enums.GameState.TUTORIAL:
+			_runner.abort()
+			_runner = Runner.new()
 			
+			get_tree().paused = false
+			
+			await _game.start(_runner, Enums.GameMode.TUTORIAL, _tutorial_level)
+			_process.show_game_overlay(0.5)
+			_process.show_tutorial_overlay(0.5, _tutorial_level)
+		
 		Enums.GameState.DEAD:
 			_process.show_death_overlay(0.5)
 		
@@ -64,8 +87,21 @@ func _on_GameStateMachine_exit_state():
 		Enums.GameState.GAME:
 			_process.hide_game_overlay(0.5)
 		
+		Enums.GameState.TUTORIAL:
+			_process.hide_game_overlay(0.5)
+			_process.hide_tutorial_overlay(0.5)
+		
+		Enums.GameState.START_TUTORIAL:
+			pass
+			
+		Enums.GameState.NEXT_TUTORIAL:
+			pass
+		
 		Enums.GameState.DEAD:
 			_process.hide_death_overlay(0.5)
+		
+		Enums.GameState.EXIT:
+			pass
 
 		_:
 			assert(false, "Unknown game state")

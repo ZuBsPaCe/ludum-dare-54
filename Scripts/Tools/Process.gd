@@ -8,11 +8,13 @@ extends Node
 @onready var _main_menu := $MainMenu
 @onready var _game_overlay := $GameOverlay
 @onready var _death_overlay := $DeathOverlay
+@onready var _tutorial_overlay := $TutorialOverlay
 
 @onready var _modulate_game_overlay := ModulateTween.new($GameOverlay, Color.TRANSPARENT)
 @onready var _modulate_transition_overlay := ModulateTween.new($TransitionOverlay, Color.BLACK)
 @onready var _modulate_main_menu := ModulateTween.new($MainMenu, Color.TRANSPARENT)
 @onready var _modulate_death_overlay := ModulateTween.new($DeathOverlay, Color.TRANSPARENT)
+@onready var _modulate_tutorial_overlay := ModulateTween.new($TutorialOverlay, Color.TRANSPARENT)
 
 
 func _ready():
@@ -26,12 +28,10 @@ func _ready():
 	
 	set_fullscreen(Globals.get_setting(Globals.SETTING_FULLSCREEN))
 	
-	_main_menu.setup(
-		Enums.MainMenuMode.Standard)
-	
 	_main_menu.visible = false
 	_game_overlay.visible = false
 	_death_overlay.visible = false
+	_tutorial_overlay.visible = false
 	
 	Globals.change_volume_requested.connect(change_volume)
 	
@@ -53,12 +53,14 @@ func set_transition_overlay(color: Color, duration: float):
 	
 
 # Can yield
-func show_main_menu(duration: float):
+func show_main_menu(duration: float, main_menu_mode):
+	_main_menu.setup(main_menu_mode)
 	await _modulate_main_menu.tween(Color.WHITE, duration)
 
 # Can yield
 func hide_main_menu(duration: float):
 	await _modulate_main_menu.tween(Color.TRANSPARENT, duration)
+	_main_menu.teardown()
 
 
 # Can yield
@@ -77,6 +79,16 @@ func show_death_overlay(duration: float):
 # Can yield
 func hide_death_overlay(duration: float):
 	await _modulate_death_overlay.tween(Color.TRANSPARENT, duration)
+
+
+# Can yield
+func show_tutorial_overlay(duration: float, tutorial_level: int):
+	_tutorial_overlay.setup(tutorial_level)
+	await _modulate_tutorial_overlay.tween(Color.WHITE, duration)
+
+# Can yield
+func hide_tutorial_overlay(duration: float):
+	await _modulate_tutorial_overlay.tween(Color.TRANSPARENT, duration)
 
 
 func on_viewport_resized():	

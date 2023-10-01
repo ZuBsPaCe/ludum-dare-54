@@ -33,6 +33,8 @@ var _mode := Enums.MainMenuMode.Standard
 
 @onready var _heart = $%Heart
 
+@onready var _tilemaps := $%Tilemaps
+
 
 @export var _unfocused_color := Color.GRAY
 @export var _focused_color := Color.WHITE
@@ -60,6 +62,10 @@ func _ready():
 	_register_focus_control(_sound, _sound_label, Callable())
 	_register_focus_control(_sound_down, _sound_label, _on_sound_down_gui_input)
 	_register_focus_control(_sound_up, _sound_label, _on_sound_up_gui_input)
+	
+	remove_child(_tilemaps)
+
+
 
 
 func setup(main_menu_mode):
@@ -99,6 +105,12 @@ func setup(main_menu_mode):
 	_sound_label.text = "Sound %d %%" % int(_sound_factor * 100)
 	
 	_heart.modulate = Globals.heart_color
+	
+	add_child(_tilemaps)
+	
+
+func teardown():
+	remove_child(_tilemaps)
 
 
 func _register_focus_control(
@@ -155,7 +167,7 @@ func _on_button_2_gui_input(event):
 		
 	match _mode:
 		Enums.MainMenuMode.Standard:
-			Globals.switch_game_state(Enums.GameState.TUTORIAL)
+			Globals.switch_game_state(Enums.GameState.START_TUTORIAL)
 		
 		Enums.MainMenuMode.Pause:
 			Globals.switch_game_state(Enums.GameState.GAME)

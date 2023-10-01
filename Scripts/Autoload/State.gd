@@ -7,6 +7,9 @@ var _spawn_scene: PackedScene
 var _player: CharacterBody2D
 
 var _runner: Runner
+var _game_mode
+var _tutorial_level
+
 var _wall_tilemap: TileMap
 var _ground_tilemap: TileMap
 var _map: Map
@@ -32,6 +35,11 @@ var player_pos: Vector2:
 	get:
 		return _player.position
 
+
+var tutorial_level: int:
+	get:
+		return _tutorial_level
+
 func setup(
 		wall_tilemap: TileMap,
 		ground_tilemap: TileMap,
@@ -46,11 +54,15 @@ func setup(
 
 
 func on_game_start(
-		runner: Runner,
+		p_runner: Runner,
+		p_game_mode,
+		p_tutorial_level: int,
 		p_map: Map,
 		p_player: CharacterBody2D):
 	
-	_runner = runner
+	_runner = p_runner
+	_game_mode = p_game_mode
+	_tutorial_level = p_tutorial_level
 	_map = p_map
 	_player = p_player
 	
@@ -143,8 +155,8 @@ func _init_spawn_groups():
 	var half_area_width := area_width / 2
 	var half_area_height := area_height / 2
 	
-	var third_area_width := area_width / 2
-	var third_area_height := area_height / 2
+	var third_area_width := area_width / 3
+	var third_area_height := area_height / 3
 	
 	var min_x := border
 	var max_x := _map.width - border - 1
@@ -221,12 +233,12 @@ func add_spawn_group() -> void:
 	var coords: Array[Vector2i] = Tools.rand_item(_spawn_group_funcs).call()
 	
 	for coord in coords:
-		_add_spawn(coord)
+		add_spawn(_runner, coord)
 
 
-func _add_spawn(coord: Vector2i):
+func add_spawn(runner: Runner, coord: Vector2i):
 	var spawn = _spawn_scene.instantiate()
-	spawn.setup(_runner, coord, 3.0)
+	spawn.setup(runner, coord, 3.0)
 	spawn.position = Tools.to_center_pos(coord)
 	Globals.entity_container.add_child(spawn)
 
