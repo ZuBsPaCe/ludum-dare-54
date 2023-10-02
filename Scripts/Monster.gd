@@ -118,3 +118,6 @@ func _physics_process(delta):
 				
 				var tween := _runner.create_tween(self)
 				tween.tween_property(self, "modulate", Tools.get_alpha_0(modulate), 3.0)
+				await tween.finished
+				queue_free()
+					

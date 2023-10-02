@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://pxgc0f8fb5dd" path="res://Objects/Tilemap/ArrowDown.png" id="4_52xva"]
 [ext_resource type="Texture2D" uid="uid://dswbxgvdyv7sb" path="res://Objects/Bullet/export/Fill.png" id="5_5ey4q"]
 
-[node name="BlockTile" type="Sprite2D" groups=["BlockTile"]]
-texture = ExtResource("1_qqc10")
+[node name="BlockTile" type="Node2D" groups=["BlockTile"]]
 script = ExtResource("2_u6awn")
+
+[node name="BlockTile" type="Sprite2D" parent="."]
+texture = ExtResource("1_qqc10")
 
 [node name="ArrowUp" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

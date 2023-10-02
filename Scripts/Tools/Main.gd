@@ -39,6 +39,8 @@ func switch_game_state(new_state):
 func _on_GameStateMachine_enter_state():
 	match _game_state.current:
 		Enums.GameState.MAIN_MENU:
+			_game.visible = false
+			_ground_tilemap.visible = false
 			get_tree().paused = true
 			
 			_process.show_main_menu(0.5, Enums.MainMenuMode.Standard)
@@ -86,6 +88,7 @@ func _on_GameStateMachine_enter_state():
 			_process.show_tutorial_overlay(0.5, _tutorial_level)
 		
 		Enums.GameState.DEAD:
+			get_tree().paused = true
 			_process.show_death_overlay(0.5)
 		
 		Enums.GameState.EXIT:

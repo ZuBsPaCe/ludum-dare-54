@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 @export var tile_offset: Vector2i
 
@@ -20,6 +20,9 @@ func setup(up: bool):
 	arrow_down.visible = !up
 
 func explode():
+	$BlockTile.visible = false
+	$ArrowDown.visible = false
+	$ArrowUp.visible = false
 	$CPUParticles2D.emitting = true
 
 

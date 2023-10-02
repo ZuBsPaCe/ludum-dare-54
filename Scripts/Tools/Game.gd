@@ -60,7 +60,9 @@ func _ready():
 
 
 func _on_switch_game_state_requested(new_state):
-	game_running = new_state == Enums.GameState.GAME
+	if new_state != Enums.GameState.GAME and new_state != Enums.GameState.TUTORIAL:
+		game_running = false
+
 
 
 func _process(delta):
@@ -528,6 +530,8 @@ func start(p_runner: Runner, p_game_mode, tutorial_level := -1):
 	
 	_spawn_cooldown.setup(self, spawn_interval, false)
 	_block_cooldown.setup(self, 1.0, false)
+	
+	game_running = true
 
 
 func _explode_block():
