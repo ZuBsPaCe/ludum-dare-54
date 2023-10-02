@@ -61,6 +61,7 @@ func _on_GameStateMachine_enter_state():
 			get_tree().paused = false
 			_game.visible = true
 			_ground_tilemap.visible = true
+			_game.continue_game()
 			_process.show_game_overlay(0.5)
 			
 		

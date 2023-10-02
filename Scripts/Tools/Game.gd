@@ -64,6 +64,10 @@ func _on_switch_game_state_requested(new_state):
 		game_running = false
 
 
+func continue_game():
+	game_running = true
+	_block_cooldown.setup(self, 1.0, false)
+
 
 func _process(delta):
 	if game_running:
